@@ -85,7 +85,7 @@ export const SITE_CONFIG = {
       },
     ],
     featuring: [
-      { name: "Dine-in", icon: "PiForkKnifeFill" },
+      { name: "Dine-in", icon: "MdOutlineFamilyRestroom" },
       { name: "Takeout", icon: "PiPackageFill" },
       { name: "Delivery", icon: "BsBagCheckFill" },
       { name: "Family friendly", icon: "MdOutlineFamilyRestroom" },
@@ -119,6 +119,8 @@ export const SITE_CONFIG = {
     { label: "Menu", href: "/Menu" },
     { label: "Catering", href: "/catering" }, // TODO: confirm they offer catering
     { label: "Gift Card", href: "/GiftCard" }, // TODO: confirm they offer gift cards
+    { label: "Rewards", href: "/rewards" },
+    { label: "Press", href: "/Blog" },
     { label: "Our Story", href: "/story" },
   ],
 
