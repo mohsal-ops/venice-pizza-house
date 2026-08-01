@@ -4,7 +4,9 @@ import { useRef, useState, useTransition, type ChangeEvent } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import { ExternalLink } from "lucide-react";
 import { updateSiteImage } from "../_actions/imageActions";
+import SlotDiagram, { SITE_IMAGE_GUIDE } from "./SlotDiagram";
 
 type SiteImageRow = { id: string; key: string; url: string; label: string };
 
@@ -13,6 +15,7 @@ function ImageCard({ image }: { image: SiteImageRow }) {
   const [file, setFile] = useState<File | null>(null);
   const [isPending, startTransition] = useTransition();
   const inputRef = useRef<HTMLInputElement>(null);
+  const guide = SITE_IMAGE_GUIDE[image.key];
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const selected = e.target.files?.[0];
@@ -70,6 +73,30 @@ function ImageCard({ image }: { image: SiteImageRow }) {
 
       <div className="p-4 space-y-3">
         <p className="font-semibold text-stone-800 text-sm">{image.label}</p>
+
+        {guide && (
+          <div className="flex gap-3 rounded-xl border border-stone-200 bg-stone-50 p-3">
+            <div className="w-[42%] max-w-[150px] shrink-0 self-start">
+              <SlotDiagram blocks={guide.blocks} />
+            </div>
+            <div className="min-w-0 flex flex-col justify-center gap-1">
+              <p className="text-[10px] font-semibold uppercase tracking-wide text-stone-400">
+                Where it appears
+              </p>
+              <p className="text-xs leading-snug text-stone-600">{guide.where}</p>
+              <a
+                href={guide.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 text-xs font-medium text-[#c85a1e] hover:underline"
+              >
+                View {guide.page}
+                <ExternalLink size={12} />
+              </a>
+            </div>
+          </div>
+        )}
+
         <input
           ref={inputRef}
           type="file"
