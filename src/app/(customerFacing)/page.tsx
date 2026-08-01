@@ -18,8 +18,8 @@ import {
   SecondSection,
   OrderDirectlyfromOUrWebsite,
   DistinctiveFeatures,
-  Featuring,
   Frequentlyaskedquestions,
+  Featuring,
 } from "./_components/HomeSections";
 import { ReviewsSection } from "./_components/ReviewsSection";
 import {
@@ -195,16 +195,16 @@ export default async function Home() {
           <ReviewsDataSection />
         </Suspense>
       </FadeIn>
-      <SectionDivider />
+      {/* <SectionDivider />
       <FadeIn delay={200}>
         <div className="p-2 w-full flex justify-center">
           <OrderDirectlyfromOUrWebsite />
         </div>
-      </FadeIn>
+      </FadeIn> */}
       <SectionDivider />
       <FadeIn delay={300}>
         <div className="w-full flex justify-center">
-          <Featuring />
+          <Featuring/>
         </div>
       </FadeIn>
       <SectionDivider />
