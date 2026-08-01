@@ -16,17 +16,25 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Metadata
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await db.post.findMany({
-    select: { id: true, createdAt: true },
-    orderBy: { createdAt: "desc" },
-  });
-
   const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
     url: `${BASE_URL}${route.path}`,
     lastModified: new Date(),
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
+
+  let posts: { id: string; createdAt: Date }[] = [];
+  try {
+    posts = await db.post.findMany({
+      select: { id: true, createdAt: true },
+      orderBy: { createdAt: "desc" },
+    });
+  } catch (error) {
+    // Don't let a DB hiccup (or an un-migrated database) fail the whole build.
+    // Fall back to the static routes only.
+    console.error("sitemap: failed to load posts, emitting static routes only", error);
+    return staticEntries;
+  }
 
   const postEntries: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/Blog/${post.id}/post`,
