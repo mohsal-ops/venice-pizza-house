@@ -45,14 +45,14 @@ function ImageCard({ image }: { image: SiteImageRow }) {
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-stone-200 shadow-sm p-5 space-y-3">
-      <p className="font-semibold text-stone-800 text-sm">{image.label}</p>
-      <div className="relative w-full max-w-[200px] h-[150px] rounded-xl overflow-hidden bg-stone-100">
+    <div className="group bg-white rounded-2xl border border-stone-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+      <div className="relative w-full aspect-[16/10] bg-stone-100">
         {(preview ?? image.url) ? (
           <Image
             src={preview ?? image.url}
             alt={image.label}
             fill
+            sizes="(max-width: 640px) 100vw, 400px"
             className="object-cover"
             unoptimized={!!preview}
           />
@@ -61,28 +61,37 @@ function ImageCard({ image }: { image: SiteImageRow }) {
             No image set
           </div>
         )}
-      </div>
-      <input
-        ref={inputRef}
-        type="file"
-        accept="image/*"
-        className="hidden"
-        onChange={handleFileChange}
-      />
-      <div className="flex flex-wrap gap-2">
-        <Button variant="outline" size="sm" type="button" onClick={() => inputRef.current?.click()}>
-          Change Image
-        </Button>
-        {file && (
-          <>
-            <Button variant="mainButton" size="sm" disabled={isPending} onClick={handleSave}>
-              {isPending ? "Saving..." : "Save"}
-            </Button>
-            <Button variant="ghost" size="sm" disabled={isPending} onClick={handleCancel}>
-              Cancel
-            </Button>
-          </>
+        {preview && (
+          <span className="absolute top-2 left-2 rounded-full bg-amber-500 text-white text-[11px] font-semibold px-2 py-0.5 shadow">
+            Unsaved preview
+          </span>
         )}
+      </div>
+
+      <div className="p-4 space-y-3">
+        <p className="font-semibold text-stone-800 text-sm">{image.label}</p>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          className="hidden"
+          onChange={handleFileChange}
+        />
+        <div className="flex flex-wrap gap-2">
+          <Button variant="outline" size="sm" type="button" onClick={() => inputRef.current?.click()}>
+            {file ? "Choose another" : "Change image"}
+          </Button>
+          {file && (
+            <>
+              <Button variant="mainButton" size="sm" disabled={isPending} onClick={handleSave}>
+                {isPending ? "Saving..." : "Save"}
+              </Button>
+              <Button variant="ghost" size="sm" disabled={isPending} onClick={handleCancel}>
+                Cancel
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -90,7 +99,7 @@ function ImageCard({ image }: { image: SiteImageRow }) {
 
 export default function SiteImageManager({ images }: { images: SiteImageRow[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4 md:px-0">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4 md:px-0">
       {images.map((img) => (
         <ImageCard key={img.id} image={img} />
       ))}

@@ -3,6 +3,9 @@ import logo from "public/logo.png";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { getLogoUrl } from "@/lib/siteSettings";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Rewards | Earn Points on Jerk Chicken & Wings",
@@ -24,7 +27,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RewardsPage() {
+export default async function RewardsPage() {
+  const logoUrl = await getLogoUrl();
+  const logoSrc = logoUrl || logo.src;
   return (
     <div className="max-w-5xl mx-auto mt-10 space-y-16">
       {/* 🔥 HERO */}
@@ -32,7 +37,7 @@ export default function RewardsPage() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(${logo.src})`,
+            backgroundImage: `url(${logoSrc})`,
             backgroundRepeat: "repeat",
             backgroundSize: "200px 200px",
             transform: "rotate(-8deg) scale(1.2)",
@@ -45,7 +50,7 @@ export default function RewardsPage() {
             Eat More. <span className="text-white">Earn More.</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl mx-auto text-yellow-200 text-lg">
+          <p className="mt-6 max-w-2xl mx-auto text-brand text-lg">
             Every order earns points that turn into free Pam's Kitchen meals.
           </p>
         </div>
@@ -55,19 +60,19 @@ export default function RewardsPage() {
       <section className="grid md:grid-cols-2 gap-10 items-center px-6">
         {/* DIGITAL POINTS CARD */}
         <div className="relative">
-          <div className="rounded-2xl bg-linear-to-br from-yellow-400 to-yellow-300 p-8 shadow-2xl -rotate-3">
+          <div className="rounded-2xl bg-linear-to-br from-brand to-brand-dark p-8 shadow-2xl -rotate-3">
             <div className="flex justify-between items-center mb-10">
-              <span className="font-bold text-black text-xl">
+              <span className="font-bold text-brand-foreground text-xl">
                 Pam's Kitchen
               </span>
-              <span className="text-black/70">Rewards</span>
+              <span className="text-brand-foreground/70">Rewards</span>
             </div>
 
-            <div className="text-black text-4xl font-extrabold mb-4">
+            <div className="text-brand-foreground text-4xl font-extrabold mb-4">
               $1 = 1 Point
             </div>
 
-            <div className="flex justify-between text-black/80 text-sm">
+            <div className="flex justify-between text-brand-foreground/80 text-sm">
               <span>No Signup Needed</span>
               <span>Phone Number Based</span>
             </div>

@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import GiftCardPageClient from "./_components/GiftCardPageClient";
+import { getLogoUrl } from "@/lib/siteSettings";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Gift Cards | Send Jerk Chicken & Wings to a Friend",
@@ -21,6 +24,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function Page() {
-  return <GiftCardPageClient />;
+export default async function Page() {
+  const logoUrl = await getLogoUrl();
+  return <GiftCardPageClient logoUrl={logoUrl} />;
 }

@@ -37,7 +37,7 @@ export default async function BlogPage() {
               />
               <div className="absolute inset-0 bg-linear-to-t from-black via-black/70 to-transparent" />
               <div className="relative z-10 p-10 max-w-4xl">
-                <span className="uppercase tracking-widest text-[#f4b400] text-sm">
+                <span className="uppercase tracking-widest text-brand text-sm">
                   Featured Story
                 </span>
                 <h1 className="text-3xl md:text-6xl font-bold mt-3 leading-tight">
@@ -48,7 +48,7 @@ export default async function BlogPage() {
                 </p>
                 <Link
                   href={`/Blog/${featured.id}/post`}
-                  className="inline-block mt-6 px-6 py-3 bg-[#f4b400] text-black font-semibold rounded-full hover:scale-105 transition"
+                  className="inline-block mt-6 px-6 py-3 bg-brand text-brand-foreground font-semibold rounded-full hover:scale-105 transition"
                 >
                   Read Story →
                 </Link>
@@ -80,7 +80,7 @@ export default async function BlogPage() {
       )}
 
       {/* BRAND STATEMENT */}
-      <section className="bg-[#f4b400] text-black py-20 text-center">
+      <section className="bg-brand text-brand-foreground py-20 text-center">
         <h3 className="text-4xl font-bold">
           This is not fast food. This is culture.
         </h3>

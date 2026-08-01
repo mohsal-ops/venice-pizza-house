@@ -23,10 +23,12 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY as string,
 );
 
-export default function GiftCardPageClient() {
+export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
   const [clientSecret, setClientSecret] = useState<string>();
   const [price, setPrice] = useState(50 * 100);
   const route = useRouter();
+  // Uploaded logo (admin → Branding) if set, otherwise the bundled logo.
+  const logoSrc = logoUrl || logo.src;
 
   useEffect(() => {
     const fetchClientSecret = async () => {
@@ -80,7 +82,7 @@ export default function GiftCardPageClient() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(${logo.src})`,
+            backgroundImage: `url(${logoSrc})`,
             backgroundRepeat: "repeat",
             backgroundSize: "200px 200px",
             transform: "rotate(-8deg) scale(1.2)",
@@ -94,7 +96,13 @@ export default function GiftCardPageClient() {
         <div className="relative z-10">
           <div className="flex justify-center mb-6">
             <div className="rounded-2xl bg-brand p-3 shadow-xl">
-              <Image src={logo} alt="Pam's Kitchen" className="h-20 w-20 rounded-full object-cover" />
+              <Image
+                src={logoUrl || logo}
+                alt="Pam's Kitchen"
+                width={80}
+                height={80}
+                className="h-20 w-20 rounded-full object-cover"
+              />
             </div>
           </div>
 
@@ -102,7 +110,7 @@ export default function GiftCardPageClient() {
             A Gift They’ll <span className="text-white">Never Forget</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl mx-auto text-yellow-200 text-lg">
+          <p className="mt-6 max-w-2xl mx-auto text-brand text-lg">
             Premium food. Bold flavors. One unforgettable experience. Send a
             Pam's Kitchen gift card instantly.
           </p>
@@ -112,19 +120,19 @@ export default function GiftCardPageClient() {
       {/* 🎁 GIFT CARD PREVIEW */}
       <section className="grid md:grid-cols-2 gap-10 items-center px-6">
         <div className="relative">
-          <div className="rounded-2xl bg-linear-to-br from-yellow-400 to-yellow-300 p-8 shadow-2xl -rotate-3">
+          <div className="rounded-2xl bg-linear-to-br from-brand to-brand-dark p-8 shadow-2xl -rotate-3">
             <div className="flex justify-between items-center mb-10">
-              <span className="font-bold text-black text-xl">
+              <span className="font-bold text-brand-foreground text-xl">
                 Pam's Kitchen
               </span>
-              <span className="text-black/70">Gift Card</span>
+              <span className="text-brand-foreground/70">Gift Card</span>
             </div>
 
-            <div className="text-black text-4xl font-extrabold mb-4">
+            <div className="text-brand-foreground text-4xl font-extrabold mb-4">
               {formatCurrency(price / 100)}
             </div>
 
-            <div className="flex justify-between text-black/80 text-sm">
+            <div className="flex justify-between text-brand-foreground/80 text-sm">
               <span>No Expiration</span>
               <span>Premium Experience</span>
             </div>

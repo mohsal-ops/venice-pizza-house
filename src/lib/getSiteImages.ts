@@ -2,6 +2,8 @@ import db from "@/db/db";
 
 export const DEFAULT_SITE_IMAGES = [
   { key: "home_hero", url: "/general/generalPages/mainImage.jpg", label: "Home Page Hero" },
+  { key: "home_feature_breakfast", url: "/general/generalPages/enjoy.jpg", label: "Home - Breakfast Feature" },
+  { key: "home_feature_comfort", url: "/general/generalPages/vibe.jpg", label: "Home - Comfort Food Feature" },
   { key: "story_hero", url: "/general/generalPages/partners.jpg", label: "Our Story - Hero" },
   { key: "story_origin", url: "/general/generalPages/grandmother.jpg", label: "Our Story - Origin Section" },
   { key: "story_closing", url: "/general/generalPages/enjoy.jpg", label: "Our Story - Closing Section" },
@@ -27,9 +29,9 @@ export async function getSiteImage(key: string): Promise<string> {
 }
 
 export async function getAllSiteImages() {
-  const images = await db.siteImage.findMany({ orderBy: { key: "asc" } });
-  if (images.length > 0) return images;
-
+  // Idempotently ensure every default slot exists (upsert with an empty update
+  // never clobbers a custom URL), so newly-added slots like the home feature
+  // photos show up in admin immediately without waiting for a homepage visit.
   await seedDefaults();
   return db.siteImage.findMany({ orderBy: { key: "asc" } });
 }
