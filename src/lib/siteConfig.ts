@@ -85,7 +85,7 @@ export const SITE_CONFIG = {
       },
     ],
     featuring: [
-      { name: "Dine-in", icon: "GiKnifeFork" },
+      { name: "Dine-in", icon: "PiForkKnifeFill" },
       { name: "Takeout", icon: "PiPackageFill" },
       { name: "Delivery", icon: "BsBagCheckFill" },
       { name: "Family friendly", icon: "MdOutlineFamilyRestroom" },
