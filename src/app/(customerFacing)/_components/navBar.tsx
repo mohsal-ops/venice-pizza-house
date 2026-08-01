@@ -70,7 +70,6 @@ export function TopNavBar({
   initialCartId: string | null;
   logoUrl?: string;
 }) {
-  // console.log("🔁 TopNavBar rendered");
 
   const pathname = usePathname();
   const [cartId, setCartId] = useState<string | null>(initialCartId);
@@ -125,7 +124,7 @@ export function TopNavBar({
                     className={[
                       "text-md rounded-md  font-medium transition-colors duration-150 flex items-center gap-2",
                       isActive
-                        ? "bg-brand text-stone-900" // active: yellow bg, dark text
+                        ? "bg-stone-100 text-stone-900" // active: yellow bg, dark text
                         : "text-stone-700  hover:bg-stone-100 ", // inactive: orange text, subtle yellow hover
                     ].join(" ")}
                   >
