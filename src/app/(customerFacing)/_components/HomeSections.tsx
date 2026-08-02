@@ -93,14 +93,15 @@ export function SecondSection({
 // Reviews moved to ./ReviewsSection.tsx (client component - adaptive grid +
 // "Read more" floating card for long reviews).
 
-export function OrderDirectlyfromOUrWebsite() {
+export function OrderDirectlyfromOUrWebsite({ image }: { image?: string }) {
   return (
-    <div className="relative flex items-end h-96 md:h-svh w-full sm:w-[85vw] rounded-2xl sm:rounded-3xl overflow-">
+    <div className="relative w-full sm:w-[85vw] h-80 sm:h-96 md:h-svh rounded-2xl sm:rounded-3xl overflow-hidden">
       <Image
-        src={mainImg}
+        src={image || mainImg}
         alt={`${SITE_CONFIG.name} homemade food plated and ready to order`}
-        sizes="(max-width: 640px) 100vw"
-        className="object-cover w-full h-full rounded-3xl"
+        fill
+        sizes="(max-width: 640px) 100vw, 85vw"
+        className="object-cover"
       />
     </div>
   );
