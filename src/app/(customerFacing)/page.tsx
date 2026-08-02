@@ -13,6 +13,7 @@ import HomeFeaturedSkeleton from "./_skeletons/HomeFeaturedSkeleton";
 import db from "@/db/db";
 import { getBusinessHours } from "@/lib/getHours";
 import { getSiteImage } from "@/lib/getSiteImages";
+import { getHomeText } from "@/lib/siteSettings";
 import {
   TopSection,
   SecondSection,
@@ -171,16 +172,22 @@ export default async function Home() {
   // heavier DB-backed sections stream in behind Suspense so they aren't
   // blocked on the featured-products and places queries. The hero image is a
   // single indexed lookup, cheap enough to await directly here.
-  const [heroImage, featureBreakfast, featureComfort] = await Promise.all([
-    getSiteImage("home_hero"),
-    getSiteImage("home_feature_breakfast"),
-    getSiteImage("home_feature_comfort"),
-  ]);
+  const [heroImage, featureBreakfast, featureComfort, homeText] =
+    await Promise.all([
+      getSiteImage("home_hero"),
+      getSiteImage("home_feature_breakfast"),
+      getSiteImage("home_feature_comfort"),
+      getHomeText(),
+    ]);
 
   return (
     <div className="flex  pt-20 flex-col gap-5 items-center justify-center    [&>*:not(:first-child)]:m-2">
       <FaqSchema />
-      <TopSection heroImage={heroImage} />
+      <TopSection
+        heroImage={heroImage}
+        headline={homeText.headline}
+        subheadline={homeText.subheadline}
+      />
       <SectionDivider />
       <Suspense fallback={<HomeFeaturedSkeleton />}>
         <FeaturedProductsSection />
