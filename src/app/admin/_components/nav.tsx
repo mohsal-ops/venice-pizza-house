@@ -33,7 +33,7 @@ import { SITE_CONFIG } from "@/lib/siteConfig";
 // Shows a small "New" pill next to recently-added tabs so the owner notices
 // them. TO REMOVE ALL BADGES: set SHOW_NEW_BADGES to false.
 // TO CHANGE WHICH TABS are flagged: edit the NEW_TAB_HREFS list.
-const SHOW_NEW_BADGES = true;
+const SHOW_NEW_BADGES = false;
 const NEW_TAB_HREFS = new Set([
   "/admin/catering",
   "/admin/hours",

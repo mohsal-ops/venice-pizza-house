@@ -38,7 +38,7 @@ export default function initHerePlacePicker({
   const defaultLayers = platform.createDefaultLayers();
 
   map = new H.Map(mapRef, defaultLayers.vector.normal.map, {
-    center: { lat: 29.9463, lng: -95.4642 }, // Pam's Kitchen, Houston, TX
+    center: { lat: 29.9463, lng: -95.4642 }, // Southern Jerks, Houston, TX
     zoom: 12,
     pixelRatio: window.devicePixelRatio || 1,
   });
