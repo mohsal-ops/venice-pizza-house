@@ -49,7 +49,7 @@ export async function requestEmailChange(newEmail: string) {
   try {
     await sendMail({
       to: normalized,
-      subject: "Confirm your new Pam's Kitchen admin email",
+      subject: "Confirm your new Venice Pizza House admin email",
       html: `
         <h2>Confirm your new email</h2>
         <p>Hi ${admin.name}, click below to make this your new admin sign-in email.</p>

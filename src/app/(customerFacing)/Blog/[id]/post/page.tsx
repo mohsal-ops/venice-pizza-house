@@ -5,12 +5,12 @@ import PostCard from "@/app/(customerFacing)/_components/PostCard";
 import InstagramFeed from "../../_components/InstagramFeed";
 
 export const metadata = {
-  title: "Pam's Kitchen Journal | Caribbean Food & Culture",
+  title: "Venice Pizza House Journal | Pizza & Italian Food",
   description:
-    "Discover stories, flavors, and behind-the-scenes from Pam's Kitchen - the home of authentic Caribbean fusion cuisine.",
+    "Discover stories, flavors, and behind-the-scenes from Venice Pizza House - the home of authentic Italian pizza and pasta.",
   openGraph: {
-    title: "Pam's Kitchen Journal",
-    description: "Stories, culture and food from Pam's Kitchen restaurant.",
+    title: "Venice Pizza House Journal",
+    description: "Stories, culture and food from Venice Pizza House restaurant.",
   },
 };
 

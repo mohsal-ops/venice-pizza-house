@@ -75,7 +75,7 @@ type Product = {
 //             </div>
 
 //       <p className="text-center text-sm text-muted-foreground">
-//         📍 Pam's Kitchen | Jerk Fried Chicken & Sandwiches in Houston
+//         📍 Venice Pizza House | Pizza, Pasta & Wings in Ore City
 //       </p>
 //     </div>
 //   );

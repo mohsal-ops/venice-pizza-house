@@ -123,7 +123,7 @@ export default async function RootLayout({
               image: `${SITE_CONFIG.siteUrl}${SITE_CONFIG.ogImage}`,
               logo: `${SITE_CONFIG.siteUrl}/logo.png`,
               priceRange: "$$",
-              servesCuisine: ["American", "Breakfast", "Burgers", "Comfort Food"],
+              servesCuisine: ["Pizza", "Italian", "Pasta", "Wings"],
               address: {
                 "@type": "PostalAddress",
                 streetAddress: SITE_CONFIG.street,

@@ -36,17 +36,17 @@ export type ItemWithSides = Item & {
 };
 
 export const metadata: Metadata = {
-  title: "Pam's Kitchen | Homemade Comfort Food & All-Day Breakfast in Friona, TX",
+  title: "Venice Pizza House | Pizza, Pasta & Wings in Ore City, TX",
   description:
-    "Pam's Kitchen serves fresh homemade breakfast all day, hand-pressed burgers, homemade pizza, and daily specials in Friona, TX. A family-friendly kitchen with catering and gift cards.",
+    "Venice Pizza House serves fresh pizzas, authentic pastas, crispy wings, and daily specials in Ore City, TX. A family-friendly kitchen with catering and gift cards.",
   keywords: [
-    "breakfast Friona TX",
-    "burgers Friona",
-    "homemade food Friona",
-    "daily specials Friona",
-    "pizza Friona",
-    "family restaurant Friona",
-    "Pam's Kitchen Friona",
+    "breakfast Ore City TX",
+    "pasta Ore City",
+    "homemade food Ore City",
+    "daily specials Ore City",
+    "pizza Ore City",
+    "family restaurant Ore City",
+    "Venice Pizza House Ore City",
   ],
   alternates: {
     canonical: "/",
@@ -55,17 +55,17 @@ export const metadata: Metadata = {
     icon: "/logo.png",
   },
   openGraph: {
-    title: "Pam's Kitchen | Homemade Comfort Food in Friona, TX",
+    title: "Venice Pizza House | Pizza, Pasta & Wings in Ore City, TX",
     description:
-      "Fresh homemade breakfast all day, hand-pressed burgers, pizza, and daily specials at Pam's Kitchen in Friona, TX.",
+      "Fresh pizzas, authentic pastas, crispy wings, and daily specials at Venice Pizza House in Ore City, TX.",
     url: "/",
-    siteName: "Pam's Kitchen",
+    siteName: "Venice Pizza House",
     images: [
       {
         url: "/general/generalPages/mainImage.jpg",
         width: 1200,
         height: 630,
-        alt: "Pam's Kitchen homemade food in Friona, TX",
+        alt: "Venice Pizza House homemade food in Ore City, TX",
       },
     ],
     locale: "en_US",
@@ -73,9 +73,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pam's Kitchen | Homemade Comfort Food in Friona, TX",
+    title: "Venice Pizza House | Pizza, Pasta & Wings in Ore City, TX",
     description:
-      "Homemade breakfast all day, burgers, pizza, and daily specials you'll crave.",
+      "Fresh pizzas, authentic pastas, wings, and daily specials you'll crave.",
     images: ["/general/generalPages/mainImage.jpg"],
   },
 };
@@ -96,7 +96,7 @@ function FaqSchema() {
               name: "What are you known for?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Homemade comfort food, hand-pressed burgers, all-day breakfast, and our daily specials.",
+                text: "Fresh pizzas, authentic pastas, crispy wings, and our daily specials.",
               },
             },
             {
@@ -104,7 +104,7 @@ function FaqSchema() {
               name: "What meals do you serve?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Breakfast (served all day), burgers, sandwiches, homemade pizza, and daily specials.",
+                text: "Pizzas, pastas, wings, salads, subs, and daily specials.",
               },
             },
             {
@@ -120,7 +120,7 @@ function FaqSchema() {
               name: "Where are you located?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "We're at 1302 W 11th St, Friona, TX 79035.",
+                text: "We're at 1302 W 11th St, Ore City, TX 79035.",
               },
             },
           ],

@@ -19,7 +19,7 @@ function getTransporter() {
 
 export async function sendMail(opts: { to: string; subject: string; html: string }) {
   await getTransporter().sendMail({
-    from: `"Pam's Kitchen Admin" <${process.env.SMTP_USER}>`,
+    from: `"Venice Pizza House Admin" <${process.env.SMTP_USER}>`,
     to: opts.to,
     subject: opts.subject,
     html: opts.html,

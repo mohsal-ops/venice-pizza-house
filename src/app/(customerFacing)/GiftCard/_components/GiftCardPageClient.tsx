@@ -98,7 +98,7 @@ export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
             <div className="rounded-2xl bg-brand p-3 shadow-xl">
               <Image
                 src={logoUrl || logo}
-                alt="Pam's Kitchen"
+                alt="Venice Pizza House"
                 width={80}
                 height={80}
                 className="h-20 w-20 rounded-full object-cover"
@@ -112,7 +112,7 @@ export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
 
           <p className="mt-6 max-w-2xl mx-auto text-brand text-lg">
             Premium food. Bold flavors. One unforgettable experience. Send a
-            Pam's Kitchen gift card instantly.
+            Venice Pizza House gift card instantly.
           </p>
         </div>
       </section>
@@ -123,7 +123,7 @@ export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
           <div className="rounded-2xl bg-linear-to-br from-brand to-brand-dark p-8 shadow-2xl -rotate-3">
             <div className="flex justify-between items-center mb-10">
               <span className="font-bold text-brand-foreground text-xl">
-                Pam's Kitchen
+                Venice Pizza House
               </span>
               <span className="text-brand-foreground/70">Gift Card</span>
             </div>

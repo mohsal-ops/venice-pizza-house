@@ -3,21 +3,21 @@ import GamesSection from "./components/sections/GamesSection";
 import HeroSection from "./components/sections/HeroSection";
 
 export const metadata: Metadata = {
-  title: "Kids Zone | Free Games for Kids at Pam's Kitchen",
+  title: "Kids Zone | Free Games for Kids at Venice Pizza House",
   description:
-    "Pam's Kitchen is a family and kids restaurant in Houston, TX. While you wait for jerk chicken and wings, play free games in our Kids Zone.",
+    "Venice Pizza House is a family and kids restaurant in Ore City, TX. While you wait for pizza, pasta, and wings, play free games in our Kids Zone.",
   keywords: [
-    "kids restaurant Houston",
-    "family restaurant Houston",
-    "kids games Pam's Kitchen",
+    "kids restaurant Ore City",
+    "family restaurant Ore City",
+    "kids games Venice Pizza House",
   ],
   alternates: {
     canonical: "/KidsZone",
   },
   openGraph: {
-    title: "Kids Zone | Pam's Kitchen Houston",
+    title: "Kids Zone | Venice Pizza House Ore City",
     description:
-      "A family-friendly Houston restaurant with a Kids Zone full of free games.",
+      "A family-friendly Ore City restaurant with a Kids Zone full of free games.",
     url: "/KidsZone",
   },
 };

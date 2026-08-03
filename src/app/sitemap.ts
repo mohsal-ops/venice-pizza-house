@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import db from "@/db/db";
 
-const BASE_URL = "https://pamskitchentx.com";
+const BASE_URL = "https://venicepizzahouseorecity.com";
 
 const STATIC_ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] }[] = [
   { path: "/", priority: 1, changeFrequency: "daily" },

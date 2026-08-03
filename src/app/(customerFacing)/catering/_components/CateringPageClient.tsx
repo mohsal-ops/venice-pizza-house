@@ -26,47 +26,47 @@ const CATERING_PACKAGES: {
   items: string[];
 }[] = [
   {
-    name: "All-Day Breakfast Spread",
+    name: "Pizza Party Package",
     serves: "Serves 10-12",
-    price: "$120",
+    price: "$130",
     items: [
-      "Scrambled eggs & crispy bacon",
-      "Sausage links & breakfast potatoes",
-      "Buttermilk pancakes with syrup",
-      "Biscuits & homemade gravy",
+      "Assorted large pizzas (cheese, pepperoni & supreme)",
+      "Hand-tossed fresh dough",
+      "Garlic knots",
+      "Marinara & ranch dips",
     ],
   },
   {
-    name: "Burger Bar",
+    name: "Pasta Feast",
     serves: "Serves 10-12",
     price: "$140",
     items: [
-      "Hand-pressed beef sliders",
-      "Cheddar, lettuce, tomato & onion",
-      "Pickles & house sauces",
-      "Seasoned fries",
+      "Spaghetti & fettuccine alfredo trays",
+      "Meatballs in marinara",
+      "Garlic bread",
+      "Grated parmesan & red pepper",
     ],
   },
   {
-    name: "Homemade Pizza Party",
-    serves: "Serves 12-15",
-    price: "$130",
-    items: [
-      "Pepperoni, cheese & supreme pizzas",
-      "Hand-tossed homemade dough",
-      "Garlic knots",
-      "Ranch & marinara dips",
-    ],
-  },
-  {
-    name: "Wings & Sides Tray",
+    name: "Wings & Appetizers Tray",
     serves: "50 wings",
     price: "$95",
     items: [
       "Crispy bone-in wings",
       "Buffalo, BBQ & plain",
-      "Celery & carrot sticks",
+      "Mozzarella sticks & jalapeno poppers",
       "Ranch & blue cheese",
+    ],
+  },
+  {
+    name: "Sub & Salad Spread",
+    serves: "Serves 12-15",
+    price: "$120",
+    items: [
+      "Assorted Italian subs, sliced",
+      "Fresh garden & Caesar salads",
+      "House vinaigrette & dressings",
+      "Chips & pickles",
     ],
   },
   {
@@ -75,9 +75,9 @@ const CATERING_PACKAGES: {
     price: "$150",
     items: [
       "Chef's choice of daily specials",
-      "Two homestyle sides",
-      "Dinner rolls",
-      "Cookies & brownies",
+      "One pizza & one pasta tray",
+      "Garlic bread",
+      "Fresh salad",
     ],
   },
   {
@@ -85,9 +85,9 @@ const CATERING_PACKAGES: {
     serves: "Serves 15",
     price: "$60",
     items: [
-      "Assorted homemade cookies",
-      "Fudge brownies",
-      "Mini fruit cobblers",
+      "Tiramisu & cannoli",
+      "New York cheesecake",
+      "Chocolate brownies",
       "Fresh whipped cream",
     ],
   },

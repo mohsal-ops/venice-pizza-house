@@ -24,7 +24,7 @@ export default function StoryClient({
       <section className="relative w-full h-[90vh] flex items-end justify-start">
         <Image
           src={images.story_hero}
-          alt="Pam's Kitchen story hero"
+          alt="Venice Pizza House story hero"
           fill
           priority
           className="object-cover brightness-[0.45]"
@@ -87,7 +87,7 @@ export default function StoryClient({
           </p>
           <p className="text-gray-600 text-lg leading-relaxed">
             Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            From all-day breakfast to hand-pressed burgers and daily specials,
+            From wood-fired pizzas to authentic pastas and daily specials,
             everything is made from scratch with care - the way comfort food is
             meant to be.
           </p>
@@ -102,7 +102,7 @@ export default function StoryClient({
         >
           <Image
             src={images.story_origin}
-            alt="The Pam's Kitchen experience"
+            alt="The Venice Pizza House experience"
             width={800}
             height={600}
             className="rounded-3xl object-top object-cover w-full h-full aspect-4/3"
@@ -199,7 +199,7 @@ export default function StoryClient({
           <p className="mt-6 text-gray-400 text-lg leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore. Homemade comfort food, served
-            fresh every day in Friona, Texas.
+            fresh every day in Ore City, Texas.
           </p>
         </motion.blockquote>
       </section>
@@ -231,7 +231,7 @@ export default function StoryClient({
             {
               icon: "🍳",
               title: "Fresh Every Day",
-              text: "No shortcuts. Breakfast, burgers, and daily specials made from scratch, fresh every single day.",
+              text: "No shortcuts. Pizzas, pastas, and daily specials made from scratch, fresh every single day.",
             },
             {
               icon: "🤝",
@@ -266,7 +266,7 @@ export default function StoryClient({
         >
           <Image
             src={images.story_closing}
-            alt="Pam's Kitchen dining experience"
+            alt="Venice Pizza House dining experience"
             width={1600}
             height={700}
             className="w-full object-cover max-h-125"
@@ -277,7 +277,7 @@ export default function StoryClient({
               This Is Just the Beginning
             </h2>
             <p className="text-gray-300 text-lg leading-relaxed mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Friona&apos;s
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ore City&apos;s
               appetite for fresh homemade food is wide open - and Pam&apos;s Kitchen
               is here to fill it, one plate at a time.
             </p>

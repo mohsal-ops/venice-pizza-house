@@ -1,5 +1,5 @@
 "use client";
-// Pam's Kitchen loading loader - a small, centered line-art burger that
+// Venice Pizza House loading loader - a small, centered line-art burger that
 // assembles from its ingredients, flashes a shine burst outward when complete,
 // then flips like a coin (3D) to reveal the logo, with a shimmering wordmark
 // underneath. Loops until the page finishes loading, then fades out.
@@ -18,7 +18,7 @@ const T = {
   end: 3900,
 };
 
-const NAME = "Pam's Kitchen";
+const NAME = "Venice Pizza House";
 
 // Shine lines radiating OUTWARD from around the burger (start near its edge and
 // shoot outward past the viewBox - the SVG uses overflow:visible).
@@ -233,7 +233,7 @@ export default function LoadingScreen({
             <div style={{ ...face, transform: "rotateY(180deg)" }}>
               <Image
                 src="/logo.png"
-                alt="Pam's Kitchen"
+                alt="Venice Pizza House"
                 width={52}
                 height={52}
                 priority

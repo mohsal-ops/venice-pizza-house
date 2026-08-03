@@ -4,22 +4,22 @@ import StoryClient from "./_components/StoryClient";
 import { getSiteImage } from "@/lib/getSiteImages";
 
 export const metadata: Metadata = {
-  title: "Our Story | Homemade Comfort Food in Friona, TX",
+  title: "Our Story | Pizza, Pasta & Wings in Ore City, TX",
   description:
-    "The story behind Pam's Kitchen - a family-owned kitchen in Friona, TX serving fresh homemade breakfast, burgers, and daily specials.",
+    "The story behind Venice Pizza House - a family-owned kitchen in Ore City, TX serving fresh pizzas, pastas, wings, and daily specials.",
   keywords: [
-    "Pam's Kitchen Friona story",
-    "family owned restaurant Friona",
-    "homemade food Friona history",
-    "Pam's Kitchen owners",
+    "Venice Pizza House Ore City story",
+    "family owned restaurant Ore City",
+    "homemade food Ore City history",
+    "Venice Pizza House owners",
   ],
   alternates: {
     canonical: "/story",
   },
   openGraph: {
-    title: "Our Story | Pam's Kitchen Friona",
+    title: "Our Story | Venice Pizza House Ore City",
     description:
-      "The family story behind Pam's Kitchen - homemade comfort food in Friona, TX.",
+      "The family story behind Venice Pizza House - homemade comfort food in Ore City, TX.",
     url: "/story",
   },
 };

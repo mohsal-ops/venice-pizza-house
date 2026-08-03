@@ -8,21 +8,21 @@ import { getLogoUrl } from "@/lib/siteSettings";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Rewards | Earn Points on Jerk Chicken & Wings",
+  title: "Rewards | Earn Points on Pizza & Wings",
   description:
-    "Join Pam's Kitchen Rewards in Houston, TX - earn points on every jerk chicken and wings order and redeem them for free sides and combos. No app required.",
+    "Join Venice Pizza House Rewards in Ore City, TX - earn points on every pizza, pasta, and wings order and redeem them for free sides and combos. No app required.",
   keywords: [
-    "restaurant rewards Houston",
-    "loyalty program Houston restaurant",
-    "Pam's Kitchen rewards",
+    "restaurant rewards Ore City",
+    "loyalty program Ore City restaurant",
+    "Venice Pizza House rewards",
   ],
   alternates: {
     canonical: "/rewards",
   },
   openGraph: {
-    title: "Rewards | Pam's Kitchen Houston",
+    title: "Rewards | Venice Pizza House Ore City",
     description:
-      "Earn points on every order and redeem them for free sides and combos at Pam's Kitchen.",
+      "Earn points on every order and redeem them for free sides and combos at Venice Pizza House.",
     url: "/rewards",
   },
 };
@@ -51,7 +51,7 @@ export default async function RewardsPage() {
           </h1>
 
           <p className="mt-6 max-w-2xl mx-auto text-brand text-lg">
-            Every order earns points that turn into free Pam's Kitchen meals.
+            Every order earns points that turn into free Venice Pizza House meals.
           </p>
         </div>
       </section>
@@ -63,7 +63,7 @@ export default async function RewardsPage() {
           <div className="rounded-2xl bg-linear-to-br from-brand to-brand-dark p-8 shadow-2xl -rotate-3">
             <div className="flex justify-between items-center mb-10">
               <span className="font-bold text-brand-foreground text-xl">
-                Pam's Kitchen
+                Venice Pizza House
               </span>
               <span className="text-brand-foreground/70">Rewards</span>
             </div>

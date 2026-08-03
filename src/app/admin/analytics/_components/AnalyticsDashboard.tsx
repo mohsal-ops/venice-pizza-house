@@ -169,7 +169,7 @@ export function AnalyticsDashboard({
       >
         <div>
           <p className="text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-1">
-            Pam's Kitchen
+            Venice Pizza House
           </p>
           <h1 className="text-2xl font-semibold tracking-tight">Website Analytics</h1>
         </div>

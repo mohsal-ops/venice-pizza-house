@@ -509,7 +509,7 @@ export async function getPageSpeedData(
   const apiKey = process.env.PAGESPEED_API_KEY;
 
   // Use dedicated pagespeed URL, not the sc-domain: Search Console one
-  const baseUrl = process.env.PAGESPEED_SITE_URL ?? "https://pamskitchentx.com";
+  const baseUrl = process.env.PAGESPEED_SITE_URL ?? "https://venicepizzahouseorecity.com";
   const targetUrl = pageUrl ?? baseUrl;
 
   if (!apiKey) {

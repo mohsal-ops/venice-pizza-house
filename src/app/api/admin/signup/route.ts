@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
   try {
     await sendMail({
       to: normalizedEmail,
-      subject: "Verify your Pam's Kitchen admin account",
+      subject: "Verify your Venice Pizza House admin account",
       html: `
         <h2>Verify your email</h2>
         <p>Hi ${name.trim()}, confirm your email to continue creating your admin account.</p>
