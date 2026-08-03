@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 import { getLogoUrl } from "@/lib/siteSettings";
+import VisitAlert from "./_components/VisitAlert";
 
 export default async function Customerlayout({
   children,
@@ -18,6 +19,7 @@ export default async function Customerlayout({
 
   return (
     <SidebarProvider>
+      <VisitAlert />
       <main className="flex relative flex-col w-full  pb- ">
         <div className="fixed top-0 left-0 right-0 z-50">
           <TopNavBar initialCartId={cartId} logoUrl={logoUrl} />
