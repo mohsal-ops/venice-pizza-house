@@ -9,6 +9,8 @@ import SchedulePickupDialog, {
 } from "./schedualePickupModal";
 import { CartItem } from "../../../../generated/prisma";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 type productObjectPath = {
   id: string;
@@ -95,7 +97,7 @@ export function PopularDishesCardClient({
             />
           </div>
 
-          {/* <div className="absolute bottom-0 z-20 flex justify-end w-full p-3 ">
+          <div className="absolute bottom-0 z-20 flex justify-end w-full p-3 ">
             <div className="flex gap-2 items-center  ">
               <Button
                 onClick={() => setOpen(true)}
@@ -105,7 +107,7 @@ export function PopularDishesCardClient({
                 <Plus className="stroke-1" size={28} />
               </Button>
             </div>
-          </div> */}
+          </div>
         </CardContent>
       </Card>
       <div className="flex  flex-col gap-1 px-2 font-semibold w-full ">
@@ -172,7 +174,7 @@ export function AllDishesCardClient({
               />
             )}
           </div>
-          {/* <div className="absolute bottom-0 z-20 flex justify-end w-full p-3 ">
+          <div className="absolute bottom-0 z-20 flex justify-end w-full p-3 ">
             <div className="flex gap-2 items-center  ">
               <Button
                 onClick={() => setOpen(true)}
@@ -182,7 +184,7 @@ export function AllDishesCardClient({
                 <Plus className="stroke-1" size={28} />
               </Button>
             </div>
-          </div> */}
+          </div>
         </CardContent>
       </Card>
       <SchedulePickupDialog
