@@ -4,6 +4,8 @@ import db from "@/db/db";
 import { google } from "googleapis";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { sendTelegramMessage } from "@/lib/telegram";
+import { sendMail } from "@/lib/email";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 
 const formatSides = (sides: any[]) => {
   if (!sides || sides.length === 0) return "";
@@ -102,6 +104,11 @@ export async function POST(req: NextRequest) {
       });
     }
 
+    // Mark the cart completed right after orders are saved, so a Stripe webhook
+    // retry (from any later non-2xx) can't create duplicate orders - the guard
+    // above short-circuits once status is "completed".
+    await db.cart.update({ where: { id: cartId }, data: { status: "completed" } });
+
     const first = cart.items[0];
 
     const itemsList = cart.items
@@ -155,15 +162,19 @@ export async function POST(req: NextRequest) {
       new Date().toLocaleString(),
     ];
 
-    await sheets.spreadsheets.values.append({
-      spreadsheetId: process.env.GOOGLE_SHEET_ID,
-      range: "Sheet1!A1",
-      valueInputOption: "USER_ENTERED",
-      insertDataOption: "INSERT_ROWS",
-      requestBody: {
-        values: [row],
-      },
-    });
+    try {
+      await sheets.spreadsheets.values.append({
+        spreadsheetId: process.env.GOOGLE_SHEET_ID,
+        range: "Sheet1!A1",
+        valueInputOption: "USER_ENTERED",
+        insertDataOption: "INSERT_ROWS",
+        requestBody: {
+          values: [row],
+        },
+      });
+    } catch (e) {
+      console.error("Google Sheets append failed (order still saved):", e);
+    }
 
     // Notify the restaurant immediately - Telegram is already wired up (src/lib/telegram.ts).
     const orderType = first.deliveryAddress ? "delivery" : "pickup";
@@ -179,15 +190,42 @@ export async function POST(req: NextRequest) {
       `Items: ${itemsList}`;
     await sendTelegramMessage(notification);
 
-    // Mark the cart completed (rather than deleting its items) so the admin
-    // orders dashboard keeps a full record - items, sides, pickup/delivery
-    // details - of every finished order.
-    await db.cart.update({ where: { id: cartId }, data: { status: "completed" } });
+    // Email the owner a copy of every order (best-effort - never blocks the
+    // order). Recipient is OWNER_ALERT_EMAIL, falling back to the SMTP account.
+    try {
+      const alertTo = process.env.OWNER_ALERT_EMAIL || process.env.SMTP_USER;
+      if (alertTo) {
+        await sendMail({
+          to: alertTo,
+          subject: `New order - $${total.toFixed(2)} - ${SITE_CONFIG.name}`,
+          html: `
+            <div style="font-family:system-ui,Segoe UI,sans-serif;font-size:15px;color:#1c1917">
+              <h2 style="margin:0 0 12px">New ${orderType} order - $${total.toFixed(2)}</h2>
+              <table style="border-collapse:collapse">
+                ${first.customerName ? `<tr><td style="padding:4px 14px 4px 0;color:#78716c">Name</td><td>${first.customerName}</td></tr>` : ""}
+                ${first.customerPhone ? `<tr><td style="padding:4px 14px 4px 0;color:#78716c">Phone</td><td>${first.customerPhone}</td></tr>` : ""}
+                <tr><td style="padding:4px 14px 4px 0;color:#78716c">Email</td><td>${email}</td></tr>
+                ${
+                  orderType === "delivery"
+                    ? `<tr><td style="padding:4px 14px 4px 0;color:#78716c">Deliver to</td><td>${first.deliveryAddress ?? ""}${first.apt ? ` (${first.apt})` : ""}</td></tr>`
+                    : `<tr><td style="padding:4px 14px 4px 0;color:#78716c">Pickup</td><td>${first.pickupDay ? new Date(first.pickupDay).toDateString() : ""} ${first.pickupTime ?? ""}</td></tr>`
+                }
+                <tr><td style="padding:4px 14px 4px 0;color:#78716c;vertical-align:top">Items</td><td>${itemsList}</td></tr>
+                <tr><td style="padding:4px 14px 4px 0;color:#78716c">Total</td><td><strong>$${total.toFixed(2)}</strong></td></tr>
+              </table>
+              <p style="margin-top:16px;color:#78716c;font-size:13px">This order is also in your admin dashboard under Orders.</p>
+            </div>`,
+        });
+      }
+    } catch (e) {
+      console.error("Order email failed (order still saved):", e);
+    }
+
     revalidatePath("/Menu");
     revalidatePath("/stripe/purchase-success");
     revalidatePath("/admin/orders");
 
-    return new NextResponse("Order saved to sheet", { status: 201 });
+    return new NextResponse("Order saved", { status: 201 });
   } catch (err) {
     console.error(err);
     return new NextResponse("Webhook error", { status: 500 });

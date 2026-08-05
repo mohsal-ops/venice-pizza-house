@@ -47,8 +47,8 @@ export default function MainPageMenu({
   hours,
 }: PropsTypes) {
   const [filtered, setfiltered] = useState<ItemWithSides[] | undefined>();
-  // Starts unset so the (currently disabled) delivery/pickup toggle forces an explicit choice once re-enabled.
-  const [choice, setChoice] = useState<"delivery" | "pickup" | null>(null);
+  // Default to pickup so ordering works out of the box; the toggle can switch to delivery.
+  const [choice, setChoice] = useState<"delivery" | "pickup" | null>("pickup");
   const [query, setQuery] = useState("");
   const placeholderRef = useRef<HTMLDivElement | null>(null);
   const [isPinned, setIsPinned] = useState(false);

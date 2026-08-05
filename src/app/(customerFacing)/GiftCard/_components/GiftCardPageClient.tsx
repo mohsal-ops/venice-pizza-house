@@ -253,7 +253,7 @@ function CheckoutForm({
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/stripe/GcPurchase-success`,
+          return_url: `${window.location.origin}/stripe/GcPurchase-success`,
           receipt_email: email,
         },
       });

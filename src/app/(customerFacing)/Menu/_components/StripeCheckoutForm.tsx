@@ -59,7 +59,7 @@ function Form({ priceInCents }: { priceInCents: number }) {
         stripe.confirmPayment({
             elements, confirmParams:
             {
-                return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/stripe/purchase-success`,
+                return_url: `${window.location.origin}/stripe/purchase-success`,
                 receipt_email: email,
         
             }

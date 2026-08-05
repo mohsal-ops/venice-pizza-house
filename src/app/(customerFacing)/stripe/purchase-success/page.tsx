@@ -12,9 +12,7 @@ export default async function Success(props: any) {
 
   if (!payment_intent) return notFound();
 
-  const paymentIntent = await stripe.paymentIntents.retrieve(payment_intent, {
-    expand: ["charges.data.balance_transaction"],
-  });
+  const paymentIntent = await stripe.paymentIntents.retrieve(payment_intent);
 
   if (!paymentIntent) return notFound();
 
@@ -44,7 +42,7 @@ export default async function Success(props: any) {
             {isSuccess ? (
               <a href="/Menu">Back to Menu</a>
             ) : (
-              <Link href={`products/${paymentIntent.metadata.cartId}/purchase`}>
+              <Link href={`/Menu/${paymentIntent.metadata.cartId}/purchase`}>
                 Try again
               </Link>
             )}
