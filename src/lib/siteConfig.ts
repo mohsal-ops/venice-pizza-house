@@ -11,6 +11,9 @@ export const SITE_CONFIG = {
   legalName: "Venice Pizza House",
   trademark: "Venice Pizza House",
 
+  // Admin intro animation: "burger" (fast food) | "coffee" (café) | "pizza" (pizzeria)
+  loaderStyle: "pizza",
+
   // Contact & Location
   address: "504 US HWY 259, Ore City, TX 75683",
   street: "504 US HWY 259",

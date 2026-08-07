@@ -1,5 +1,5 @@
 "use client";
-// TEMPORARY preview of the admin loading effect (skeleton + looping burger).
+// TEMPORARY preview of the admin loading effect (skeleton + looping loader).
 import LoadingScreen from "@/components/LoadingScreen";
 import { GenericSkeleton } from "@/app/admin/_components/AdminSkeletons";
 
