@@ -7,6 +7,7 @@ export const DEFAULT_SITE_IMAGES = [
   { key: "story_hero", url: "/general/generalPages/partners.jpg", label: "Our Story - Hero" },
   { key: "story_origin", url: "/general/generalPages/grandmother.jpg", label: "Our Story - Origin Section" },
   { key: "story_closing", url: "/general/generalPages/enjoy.jpg", label: "Our Story - Closing Section" },
+  { key: "catering_hero", url: "/general/generalPages/enjoy.jpg", label: "Catering - Hero" },
 ];
 
 async function seedDefaults() {

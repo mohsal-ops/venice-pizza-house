@@ -15,9 +15,11 @@ import ActivateAndDesactivate, {
   DeleteItemComp,
   IsFeaturedOrNot,
 } from "./_components/productsActions";
-import SampleMenuButtons from "./_components/SampleMenuButtons";
+import { getAccess } from "@/lib/getAccess";
+import PreviewSectionNote from "../_components/PreviewSectionNote";
 
 export default async function Items() {
+  const access = await getAccess();
   const items = await db.item?.findMany();
   const itemAndTypeFunction = async (items: any[]) => {
     return await Promise.all(
@@ -47,15 +49,19 @@ export default async function Items() {
               {data.length} item{data.length === 1 ? "" : "s"} on your menu
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <SampleMenuButtons />
-            <Link href="/admin/menuItems/new">
-              <Button variant="mainButton" size="md" className="gap-1.5">
-                <Plus size={16} /> Add item
-              </Button>
-            </Link>
-          </div>
+          <Link href="/admin/menuItems/new">
+            <Button variant="mainButton" size="md" className="gap-1.5">
+              <Plus size={16} /> Add item
+            </Button>
+          </Link>
         </div>
+
+        {access.mode === "preview" && (
+          <PreviewSectionNote>
+            Every order placed through your own menu skips the 15–30% commission
+            DoorDash and Uber Eats take — that margin stays with you.
+          </PreviewSectionNote>
+        )}
 
         {/* Table card */}
         <div className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm">
