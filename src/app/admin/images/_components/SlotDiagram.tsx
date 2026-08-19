@@ -28,7 +28,17 @@ export const SITE_IMAGE_GUIDE: Record<string, SlotGuide> = {
       { k: "text" },
     ],
   },
-  home_feature_breakfast: {
+  home_order: {
+    page: "Home page",
+    href: "/",
+    where: "The full-width 'Order Directly' banner further down the home page.",
+    blocks: [
+      { k: "nav" },
+      { k: "band" },
+      { k: "full", active: true },
+    ],
+  },
+  home_feature_1: {
     page: "Home page",
     href: "/",
     where: "First feature row (further down) - the photo on the left.",
@@ -39,7 +49,7 @@ export const SITE_IMAGE_GUIDE: Record<string, SlotGuide> = {
       { k: "split", side: "right" },
     ],
   },
-  home_feature_comfort: {
+  home_feature_2: {
     page: "Home page",
     href: "/",
     where: "Second feature row (further down) - the photo on the right.",
@@ -78,6 +88,16 @@ export const SITE_IMAGE_GUIDE: Record<string, SlotGuide> = {
       { k: "nav" },
       { k: "text" },
       { k: "full", active: true },
+    ],
+  },
+  catering_hero: {
+    page: "Catering",
+    href: "/catering",
+    where: "The hero photo at the top of the Catering page, beside the headline.",
+    blocks: [
+      { k: "nav" },
+      { k: "split", side: "left", active: true },
+      { k: "text" },
     ],
   },
 };

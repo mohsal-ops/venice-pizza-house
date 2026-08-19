@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
+import { buildMetadata } from "@/lib/seo";
 import { cookies } from "next/headers";
 import {
   GetCartItems,
@@ -13,14 +13,15 @@ import HomeFeaturedSkeleton from "./_skeletons/HomeFeaturedSkeleton";
 import db from "@/db/db";
 import { getBusinessHours } from "@/lib/getHours";
 import { getSiteImage } from "@/lib/getSiteImages";
-import { getHomeText } from "@/lib/siteSettings";
+import { getLogoUrl, getSiteText } from "@/lib/siteSettings";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 import {
   TopSection,
   SecondSection,
   OrderDirectlyfromOUrWebsite,
   DistinctiveFeatures,
-  Frequentlyaskedquestions,
   Featuring,
+  Frequentlyaskedquestions,
 } from "./_components/HomeSections";
 import { ReviewsSection } from "./_components/ReviewsSection";
 import {
@@ -35,50 +36,7 @@ export type ItemWithSides = Item & {
   })[];
 };
 
-export const metadata: Metadata = {
-  title: "Venice Pizza House | Pizza, Pasta & Wings in Ore City, TX",
-  description:
-    "Venice Pizza House serves fresh pizzas, authentic pastas, crispy wings, and daily specials in Ore City, TX. A family-friendly kitchen with catering and gift cards.",
-  keywords: [
-    "breakfast Ore City TX",
-    "pasta Ore City",
-    "homemade food Ore City",
-    "daily specials Ore City",
-    "pizza Ore City",
-    "family restaurant Ore City",
-    "Venice Pizza House Ore City",
-  ],
-  alternates: {
-    canonical: "/",
-  },
-  icons: {
-    icon: "/logo.png",
-  },
-  openGraph: {
-    title: "Venice Pizza House | Pizza, Pasta & Wings in Ore City, TX",
-    description:
-      "Fresh pizzas, authentic pastas, crispy wings, and daily specials at Venice Pizza House in Ore City, TX.",
-    url: "/",
-    siteName: "Venice Pizza House",
-    images: [
-      {
-        url: "/general/generalPages/mainImage.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Venice Pizza House homemade food in Ore City, TX",
-      },
-    ],
-    locale: "en_US",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Venice Pizza House | Pizza, Pasta & Wings in Ore City, TX",
-    description:
-      "Fresh pizzas, authentic pastas, wings, and daily specials you'll crave.",
-    images: ["/general/generalPages/mainImage.jpg"],
-  },
-};
+export const metadata = buildMetadata("home");
 
 function FaqSchema() {
   // Mirrors the questions/answers rendered in Frequentlyaskedquestions below -
@@ -96,7 +54,7 @@ function FaqSchema() {
               name: "What are you known for?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Fresh pizzas, authentic pastas, crispy wings, and our daily specials.",
+                text: "Homemade comfort food, hand-pressed burgers, all-day breakfast, and our daily specials.",
               },
             },
             {
@@ -104,7 +62,7 @@ function FaqSchema() {
               name: "What meals do you serve?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Pizzas, pastas, wings, salads, subs, and daily specials.",
+                text: "Breakfast (served all day), burgers, sandwiches, homemade pizza, and daily specials.",
               },
             },
             {
@@ -120,7 +78,7 @@ function FaqSchema() {
               name: "Where are you located?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "We're at 1302 W 11th St, Ore City, TX 79035.",
+                text: "We're at 1302 W 11th St, Eagle Pass, TX 79035.",
               },
             },
           ],
@@ -151,8 +109,11 @@ async function FeaturedProductsSection() {
 async function LocationSection() {
   const [placesRes, hours] = await Promise.all([GetPlaces(), getBusinessHours()]);
   const places = placesRes?.places ?? [];
-  const lat = places[0]?.lat ?? 0;
-  const lng = places[0]?.lng ?? 0;
+  // Fall back to the address in siteConfig when no location row exists yet
+  // (fresh DB / not filled in the dashboard) so the map centers on the real
+  // restaurant instead of 0,0 in the ocean.
+  const lat = places[0]?.lat ?? SITE_CONFIG.lat;
+  const lng = places[0]?.lng ?? SITE_CONFIG.lng;
 
   return <OurLocation places={places} lat={lat} lng={lng} hours={hours} />;
 }
@@ -172,13 +133,21 @@ export default async function Home() {
   // heavier DB-backed sections stream in behind Suspense so they aren't
   // blocked on the featured-products and places queries. The hero image is a
   // single indexed lookup, cheap enough to await directly here.
-  const [heroImage, featureBreakfast, featureComfort, homeText] =
-    await Promise.all([
-      getSiteImage("home_hero"),
-      getSiteImage("home_feature_breakfast"),
-      getSiteImage("home_feature_comfort"),
-      getHomeText(),
-    ]);
+  const [
+    heroImage,
+    orderImage,
+    featureBreakfast,
+    featureComfort,
+    homeText,
+    logoUrl,
+  ] = await Promise.all([
+    getSiteImage("home_hero"),
+    getSiteImage("home_order"),
+    getSiteImage("home_feature_1"),
+    getSiteImage("home_feature_2"),
+    getSiteText(),
+    getLogoUrl(),
+  ]);
 
   return (
     <div className="flex  pt-20 flex-col gap-5 items-center justify-center    [&>*:not(:first-child)]:m-2">
@@ -187,6 +156,7 @@ export default async function Home() {
         heroImage={heroImage}
         headline={homeText.headline}
         subheadline={homeText.subheadline}
+        logoUrl={logoUrl}
       />
       <SectionDivider />
       <Suspense fallback={<HomeFeaturedSkeleton />}>
@@ -202,22 +172,28 @@ export default async function Home() {
           <ReviewsDataSection />
         </Suspense>
       </FadeIn>
-      {/* <SectionDivider />
+      <SectionDivider />
       <FadeIn delay={200}>
         <div className="p-2 w-full flex justify-center">
-          <OrderDirectlyfromOUrWebsite />
+          <OrderDirectlyfromOUrWebsite image={orderImage} />
         </div>
-      </FadeIn> */}
+      </FadeIn>
       <SectionDivider />
       <FadeIn delay={300}>
         <div className="w-full flex justify-center">
-          <Featuring/>
+          <Featuring />
         </div>
       </FadeIn>
       <SectionDivider />
       <FadeIn delay={400}>
         <DistinctiveFeatures
           images={{ breakfast: featureBreakfast, comfort: featureComfort }}
+          texts={{
+            feature1Title: homeText.feature1Title,
+            feature1Desc: homeText.feature1Desc,
+            feature2Title: homeText.feature2Title,
+            feature2Desc: homeText.feature2Desc,
+          }}
         />
       </FadeIn>
       <SectionDivider />

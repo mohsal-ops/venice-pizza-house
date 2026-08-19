@@ -69,13 +69,13 @@ html body[data-scroll-locked] {
   --sidebar-width-icon: 6rem;
   --sidebar-transition: 300ms; /* animation duration/ease */
 
-  /* Brand accent (themeable via admin → Branding). Defaults to the current
-     yellow; --brand-dark auto-derives a readable shade for text/hover. */
-  --brand: #facc15;
+  /* Brand accent (themeable via admin → Branding). Defaults to the Wagon
+     Wheel red; --brand-dark auto-derives a readable shade for text/hover. */
+  --brand: #b91c1c;
   --brand-dark: color-mix(in srgb, var(--brand) 70%, black);
   /* readable text on the brand color - black on light, white on dark.
      Set at runtime by the root layout to match the chosen color. */
-  --brand-foreground: #000000;
+  --brand-foreground: #ffffff;
 
   --background: 0 0% 100%;
   --foreground: 222.2 47.4% 11.2%;
@@ -361,3 +361,11 @@ html body[data-scroll-locked] {
 .read-the-docs {
   color: #888;
 }
+
+/* Drifting logo watermark background (LogoDriftBackground.tsx). */
+@keyframes logoDrift {
+  from { transform: translate(0, 0); }
+  to { transform: translate(-90px, 90px); }
+}
+.logo-drift { animation: logoDrift 14s linear infinite; will-change: transform; }
+@media (prefers-reduced-motion: reduce) { .logo-drift { animation: none; } }

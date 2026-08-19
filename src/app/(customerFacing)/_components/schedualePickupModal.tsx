@@ -75,7 +75,7 @@ type Product = {
 //             </div>
 
 //       <p className="text-center text-sm text-muted-foreground">
-//         📍 Venice Pizza House | Pizza, Pasta & Wings in Ore City
+//         📍 The Wagon Wheel | Texas BBQ in Eagle Pass
 //       </p>
 //     </div>
 //   );

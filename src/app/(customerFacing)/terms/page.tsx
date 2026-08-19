@@ -1,14 +1,6 @@
-import type { Metadata } from "next";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Terms and Policies",
-  description:
-    "Terms of service, privacy policy, and ordering policies for Venice Pizza House in Ore City, TX.",
-  robots: { index: false, follow: true },
-  alternates: {
-    canonical: "/terms",
-  },
-};
+export const metadata = buildMetadata("terms");
 
 export default function TermsAndPolicies() {
   return (
@@ -20,7 +12,7 @@ export default function TermsAndPolicies() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Terms of Service</h2>
           <p className="text-gray-700 mb-4">
-            By accessing and using Venice Pizza House restaurant website and services, you agree to be bound by these terms and conditions.
+            By accessing and using The Wagon Wheel restaurant website and services, you agree to be bound by these terms and conditions.
           </p>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
             <li>All orders are subject to acceptance and availability</li>
@@ -53,7 +45,7 @@ export default function TermsAndPolicies() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Disclaimer</h2>
           <p className="text-gray-700 mb-4">
-            The information provided on this website is for informational purposes only. Venice Pizza House makes no representations or warranties of any kind regarding the accuracy or completeness of the content.
+            The information provided on this website is for informational purposes only. The Wagon Wheel makes no representations or warranties of any kind regarding the accuracy or completeness of the content.
           </p>
         </section>
 
@@ -61,7 +53,7 @@ export default function TermsAndPolicies() {
         <section className="mb-12">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Limitation of Liability</h2>
           <p className="text-gray-700">
-            In no event shall Venice Pizza House be liable for any indirect, incidental, special, or consequential damages arising from your use of this website or services.
+            In no event shall The Wagon Wheel be liable for any indirect, incidental, special, or consequential damages arising from your use of this website or services.
           </p>
         </section>
 
@@ -69,7 +61,7 @@ export default function TermsAndPolicies() {
         <section className="border-t pt-8">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Us</h2>
           <p className="text-gray-700">
-            If you have any questions about these terms and policies, please contact us at roma.pizza@yahoo.com
+            If you have any questions about these terms and policies, please contact us at support@thewagonwheel.co
           </p>
         </section>
       </div>

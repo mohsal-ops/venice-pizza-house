@@ -1,3 +1,5 @@
+import { SITE_CONFIG } from "@/lib/siteConfig";
+
 let map: any;
 let platform: any;
 let ui: any;
@@ -38,7 +40,7 @@ export default function initHerePlacePicker({
   const defaultLayers = platform.createDefaultLayers();
 
   map = new H.Map(mapRef, defaultLayers.vector.normal.map, {
-    center: { lat: 32.8037983, lng: -94.7191372 }, // Venice Pizza House, Ore City, TX
+    center: { lat: SITE_CONFIG.lat, lng: SITE_CONFIG.lng },
     zoom: 12,
     pixelRatio: window.devicePixelRatio || 1,
   });

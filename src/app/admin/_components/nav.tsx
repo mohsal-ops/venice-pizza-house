@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import {
@@ -25,6 +26,7 @@ import {
   Globe,
   Palette,
   ExternalLink,
+  FileText,
   type LucideIcon,
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/siteConfig";
@@ -85,6 +87,7 @@ const NAV_GROUPS: NavGroup[] = [
     items: [
       { href: "/admin/story", label: "Our Story", icon: Newspaper },
       { href: "/admin/Blog", label: "Blog", icon: BookOpen },
+      { href: "/admin/content", label: "Content", icon: FileText },
       { href: "/admin/media", label: "Media", icon: Images },
       { href: "/admin/reviews", label: "Reviews", icon: Star },
     ],
@@ -160,11 +163,17 @@ function NavItemLink({
   );
 }
 
-function Brand({ compact = false }: { compact?: boolean }) {
+function Brand({ compact = false, logoUrl }: { compact?: boolean; logoUrl?: string }) {
   return (
     <div className="flex items-center gap-2.5">
-      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#c85a1e]">
-        <span className="text-xs font-bold text-white">SJ</span>
+      <div className="flex h-8 w-8 items-center justify-center overflow-hidden rounded-lg bg-stone-800">
+        <Image
+          src={logoUrl || "/general/logo/logo.png"}
+          alt={`${SITE_CONFIG.name} logo`}
+          width={32}
+          height={32}
+          className="h-full w-full object-cover"
+        />
       </div>
       {!compact && (
         <div className="leading-tight">
@@ -250,7 +259,13 @@ function SidebarBody({
   );
 }
 
-export function AdminNav({ newCateringCount = 0 }: { newCateringCount?: number }) {
+export function AdminNav({
+  newCateringCount = 0,
+  logoUrl,
+}: {
+  newCateringCount?: number;
+  logoUrl?: string;
+}) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -259,13 +274,14 @@ export function AdminNav({ newCateringCount = 0 }: { newCateringCount?: number }
       {/* Desktop sidebar */}
       <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-stone-800 bg-stone-900 text-white md:flex">
         <div className="flex h-16 items-center border-b border-stone-800 px-5">
-          <Brand />
+          <Brand logoUrl={logoUrl} />
         </div>
         <SidebarBody pathname={pathname} newCateringCount={newCateringCount} />
       </aside>
 
-      {/* Mobile top bar */}
-      <div className="fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b border-stone-800 bg-stone-900 px-3 text-white md:hidden">
+      {/* Mobile top bar — sticky (in flow) so it sits below the preview banner
+          instead of overlapping it; sticks to the top on scroll. */}
+      <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-stone-800 bg-stone-900 px-3 text-white md:hidden">
         <button
           aria-label="Open menu"
           onClick={() => setMobileOpen(true)}
@@ -276,7 +292,7 @@ export function AdminNav({ newCateringCount = 0 }: { newCateringCount?: number }
             <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-orange-500" />
           )}
         </button>
-        <Brand compact />
+        <Brand compact logoUrl={logoUrl} />
         <Link
           href="/admin/profile"
           aria-label="Your profile"
@@ -292,7 +308,7 @@ export function AdminNav({ newCateringCount = 0 }: { newCateringCount?: number }
           <div className="absolute inset-0 bg-black/50" onClick={() => setMobileOpen(false)} />
           <div className="absolute left-0 top-0 flex h-full w-72 max-w-[82vw] flex-col bg-stone-900 text-white shadow-xl">
             <div className="flex h-16 items-center justify-between border-b border-stone-800 px-5">
-              <Brand />
+              <Brand logoUrl={logoUrl} />
               <button
                 aria-label="Close menu"
                 onClick={() => setMobileOpen(false)}

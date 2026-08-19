@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     });
 
     await transporter.sendMail({
-      from: `"Venice Pizza House Catering" <${process.env.SMTP_USER}>`,
+      from: `"The Wagon Wheel Catering" <${process.env.SMTP_USER}>`,
       to: process.env.CATERING_EMAIL,
       subject: "New Catering Request",
       html: `

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import nodemailer from "nodemailer";
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder");
 
 const endpointSecret = process.env.STRIPE_GIFTCARD_WEBHOOK_SECRET!;
 
@@ -47,7 +47,7 @@ export async function POST(req: Request) {
 
     try {
       await transporter.sendMail({
-        from: `"Venice Pizza House Gift Card" <${process.env.SMTP_USER}>`,
+        from: `"The Wagon Wheel Gift Card" <${process.env.SMTP_USER}>`,
         to: process.env.CATERING_EMAIL,
         subject: "New Gift Card Purchase",
         html: `

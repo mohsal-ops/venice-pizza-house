@@ -70,6 +70,7 @@ export function TopNavBar({
   initialCartId: string | null;
   logoUrl?: string;
 }) {
+  // console.log("🔁 TopNavBar rendered");
 
   const pathname = usePathname();
   const [cartId, setCartId] = useState<string | null>(initialCartId);
@@ -105,13 +106,15 @@ export function TopNavBar({
 
       <div className="hidden md:flex justify-between h-16 md:h-20 md:w-[80%]  items-center ">
         <div className="flex items-center justify-center w-auto ">
-          <Image
-            alt={`${SITE_CONFIG.name} logo`}
-            className="h-14 w-14 rounded-full object-cover"
-            src={logoUrl || Logo}
-            height={60}
-            width={60}
-          />
+          <Link href="/" aria-label={`${SITE_CONFIG.name} home`}>
+            <Image
+              alt={`${SITE_CONFIG.name} logo`}
+              className="h-14 w-14 rounded-full object-cover"
+              src={logoUrl || Logo}
+              height={60}
+              width={60}
+            />
+          </Link>
         </div>
         <div className="flex justify-end gap-4 items-center">
           <div className="flex overflow-auto gap-2 justify-center w-full py-1">
@@ -137,6 +140,11 @@ export function TopNavBar({
               );
             })}
           </div>
+          <Link href="/Menu">
+          <Button size="lg" variant="mainButton">
+            {SITE_CONFIG.menuCtaLabel}
+          </Button>
+        </Link>
           <div>
             <CartSideBar cartId={cartId} cartItems={cartItems} />
           </div>

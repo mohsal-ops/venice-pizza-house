@@ -266,7 +266,7 @@ export default function SidesGroupBuilder({
         enabled={enabled.loadedFriesNo}
         onToggle={(v) => setEnabled({ ...enabled, loadedFriesNo: v })}
       >
-        {["No Garlic Butter", "No Marinara Sauce"].map((o) => (
+        {["No Golden Ranch Sauce", "No BBQ Sauce"].map((o) => (
           <Option disabled={!enabled.loadedFriesNo} key={o}>
             <Checkbox
               disabled={!enabled.loadedFriesNo}

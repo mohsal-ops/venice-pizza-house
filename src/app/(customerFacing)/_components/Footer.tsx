@@ -46,7 +46,7 @@ export function Footer({ logoUrl }: { logoUrl?: string }) {
           <div className="flex flex-col gap-2">
             <Button variant="link">
               <Link className="text-start" href="/Menu">
-                View our menu
+                {SITE_CONFIG.menuCtaLabel}
               </Link>
             </Button>
           </div>
@@ -54,7 +54,7 @@ export function Footer({ logoUrl }: { logoUrl?: string }) {
         <div className="flex flex-col gap-4 w-full pt-2  md:w-1/5 ">
           <Link href="/Menu">
             <Button size="sm" className="w-full" variant="mainButton">
-              View our menu
+              {SITE_CONFIG.menuCtaLabel}
               <MdKeyboardArrowRight />
             </Button>
           </Link>

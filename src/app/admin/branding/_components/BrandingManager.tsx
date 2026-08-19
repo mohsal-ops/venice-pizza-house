@@ -126,7 +126,7 @@ export default function BrandingManager({
               type="text"
               value={headline}
               onChange={(e) => setHeadline(e.target.value)}
-              placeholder="Your home page headline"
+              placeholder="e.g. Eagle Pass' viral Texas BBQ"
               className="w-full rounded-lg border border-stone-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-stone-300"
             />
           </div>
@@ -138,7 +138,7 @@ export default function BrandingManager({
               type="text"
               value={subheadline}
               onChange={(e) => setSubheadline(e.target.value)}
-              placeholder="Your home page subtitle"
+              placeholder="e.g. brisket, ribs & sausage smoked daily"
               className="w-full rounded-lg border border-stone-200 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-stone-300"
             />
           </div>

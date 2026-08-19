@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 import { Partner } from "generated/prisma";
 
 type StoryImages = {
@@ -24,12 +25,12 @@ export default function StoryClient({
       <section className="relative w-full h-[90vh] flex items-end justify-start">
         <Image
           src={images.story_hero}
-          alt="Venice Pizza House story hero"
+          alt="The Wagon Wheel story hero"
           fill
           priority
           className="object-cover brightness-[0.45]"
         />
-        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/80 via-white/20 to-transparent" />
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -87,7 +88,7 @@ export default function StoryClient({
           </p>
           <p className="text-gray-600 text-lg leading-relaxed">
             Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            From wood-fired pizzas to authentic pastas and daily specials,
+            From all-day breakfast to hand-pressed burgers and daily specials,
             everything is made from scratch with care - the way comfort food is
             meant to be.
           </p>
@@ -102,7 +103,7 @@ export default function StoryClient({
         >
           <Image
             src={images.story_origin}
-            alt="The Venice Pizza House experience"
+            alt="The Wagon Wheel experience"
             width={800}
             height={600}
             className="rounded-3xl object-top object-cover w-full h-full aspect-4/3"
@@ -199,7 +200,7 @@ export default function StoryClient({
           <p className="mt-6 text-gray-400 text-lg leading-relaxed">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore. Homemade comfort food, served
-            fresh every day in Ore City, Texas.
+            fresh every day in Eagle Pass, Texas.
           </p>
         </motion.blockquote>
       </section>
@@ -231,7 +232,7 @@ export default function StoryClient({
             {
               icon: "🍳",
               title: "Fresh Every Day",
-              text: "No shortcuts. Pizzas, pastas, and daily specials made from scratch, fresh every single day.",
+              text: "No shortcuts. Breakfast, burgers, and daily specials made from scratch, fresh every single day.",
             },
             {
               icon: "🤝",
@@ -247,7 +248,6 @@ export default function StoryClient({
               transition={{ duration: 0.7, ease: "easeOut", delay: i * 0.12 }}
               className="bg-white border border-stone-200 rounded-2xl p-8 space-y-3"
             >
-              <span className="text-3xl">{v.icon}</span>
               <h3 className="text-xl font-semibold">{v.title}</h3>
               <p className="text-gray-500 leading-relaxed">{v.text}</p>
             </motion.div>
@@ -266,7 +266,7 @@ export default function StoryClient({
         >
           <Image
             src={images.story_closing}
-            alt="Venice Pizza House dining experience"
+            alt="The Wagon Wheel dining experience"
             width={1600}
             height={700}
             className="w-full object-cover max-h-125"
@@ -277,15 +277,15 @@ export default function StoryClient({
               This Is Just the Beginning
             </h2>
             <p className="text-gray-300 text-lg leading-relaxed mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ore City&apos;s
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Eagle Pass&apos;s
               appetite for fresh homemade food is wide open - and Pam&apos;s Kitchen
               is here to fill it, one plate at a time.
             </p>
             <a
               href="/Menu"
-              className="inline-flex items-center gap-2 bg-brand text-stone-900 font-semibold px-7 py-3 rounded-xl hover:bg-yellow-300 transition-colors text-sm"
+              className="inline-flex items-center gap-2 bg-brand text-brand-foreground font-semibold px-7 py-3 rounded-xl hover:bg-brand-dark transition-colors text-sm"
             >
-              View our menu
+              {SITE_CONFIG.menuCtaLabel}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                 <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>

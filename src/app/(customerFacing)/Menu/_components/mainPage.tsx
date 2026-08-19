@@ -1,6 +1,7 @@
 "use client";
 import React, { Suspense, useEffect, useRef, useState } from "react";
 import { FaLocationPin } from "react-icons/fa6";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 import { PiMagnifyingGlass } from "react-icons/pi";
 import { Button } from "@/components/ui/button";
 import { AllDishesSuspense, PopularDishesSuspense } from "./ProductSuspense";
@@ -220,11 +221,11 @@ export default function MainPageMenu({
           id="name&address"
         >
           <p className="tracking-tight font-serif  text-xl text-center">
-            Pizza, Pasta, Wings & Daily Specials
+            {SITE_CONFIG.tagline}
           </p>
           <span className="flex text-sm space-x-2 justify-center sm:justify-start items-center font-semibold w-4/5 gap-1  text-neutral-600 text-center  ">
             <FaLocationPin className="md:block hidden" />
-            <p>504 US HWY 259, Ore City, TX 75683</p>
+            <p>{SITE_CONFIG.address}</p>
 
             <p className="flex items-center gap-1.5 text-sm font-medium">
               <span
@@ -432,7 +433,7 @@ export function PopularDishes({
             className="absolute right-2 top-1/2 -translate-y-1/2 z-50
                              flex items-center justify-center
                              w-10 h-10 rounded-full shadow-md
-                             bg-brand text-black
+                             bg-brand text-white
                              hover:bg-brand-dark transition-colors"
           >
             <MdKeyboardArrowRight size={24} />

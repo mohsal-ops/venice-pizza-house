@@ -14,7 +14,7 @@ const TABS = [
     label: "Site photos",
     icon: ImageIcon,
     blurb:
-      "Fixed spots on your site, the home page hero, the two home feature photos, and the Our Story photos. Each slot holds one specific image.",
+      "Fixed spots on your site, the home page hero and the Our Story photos. Each slot holds one specific image.",
   },
   {
     id: "gallery" as const,

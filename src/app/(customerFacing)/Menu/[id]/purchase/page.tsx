@@ -9,7 +9,7 @@ interface PageProps {
   params: Promise<{ id: string }>
 }
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder")
 
 // ✅ FIX: await the params
 export default async function Page({ params }: PageProps) {

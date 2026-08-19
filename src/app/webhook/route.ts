@@ -33,10 +33,10 @@ const formatSides = (sides: any[]) => {
     .join(" | ");
 };
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_placeholder");
 
 // Google Sheets client
-const key = JSON.parse(process.env.GOOGLE_SERVICE_KEY as string);
+const key = JSON.parse(process.env.GOOGLE_SERVICE_KEY || "{}");
 
 const auth = new google.auth.JWT({
   email: key.client_email,

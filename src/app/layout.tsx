@@ -122,8 +122,8 @@ export default async function RootLayout({
               email: SITE_CONFIG.email,
               image: `${SITE_CONFIG.siteUrl}${SITE_CONFIG.ogImage}`,
               logo: `${SITE_CONFIG.siteUrl}/logo.png`,
-              priceRange: "$$",
-              servesCuisine: ["Pizza", "Italian", "Pasta", "Wings"],
+              priceRange: SITE_CONFIG.priceRange,
+              servesCuisine: SITE_CONFIG.cuisines,
               address: {
                 "@type": "PostalAddress",
                 streetAddress: SITE_CONFIG.street,

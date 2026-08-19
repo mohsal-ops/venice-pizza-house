@@ -1,18 +1,11 @@
 import Image from "next/image";
+import { buildMetadata } from "@/lib/seo";
 import Link from "next/link";
 import db from "@/db/db";
 import PostCard from "@/app/(customerFacing)/_components/PostCard";
 import InstagramFeed from "../../_components/InstagramFeed";
 
-export const metadata = {
-  title: "Venice Pizza House Journal | Pizza & Italian Food",
-  description:
-    "Discover stories, flavors, and behind-the-scenes from Venice Pizza House - the home of authentic Italian pizza and pasta.",
-  openGraph: {
-    title: "Venice Pizza House Journal",
-    description: "Stories, culture and food from Venice Pizza House restaurant.",
-  },
-};
+export const metadata = buildMetadata("blog");
 
 export default async function BlogPage() {
   const posts = await db.post.findMany({
@@ -80,7 +73,7 @@ export default async function BlogPage() {
       )}
 
       {/* BRAND STATEMENT */}
-      <section className="bg-[#f4b400] text-black py-20 text-center">
+      <section className="bg-brand text-black py-20 text-center">
         <h3 className="text-4xl font-bold">
           This is not fast food. This is culture.
         </h3>

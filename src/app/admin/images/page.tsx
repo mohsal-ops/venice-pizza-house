@@ -12,7 +12,7 @@ export default async function ImagesPage() {
       <div className="p-5 space-y-3 w-full lg:w-[80%]">
         <PageHeader>Site Images</PageHeader>
         <p className="text-sm text-stone-500 px-4 md:px-0">
-          Update the home page hero, the home feature photos, and the Our Story photos. Changes apply immediately.
+          Update the home page hero and Our Story photos. Changes apply immediately.
         </p>
         <SiteImageManager images={images} />
       </div>

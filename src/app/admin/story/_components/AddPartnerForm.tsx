@@ -139,7 +139,7 @@ export default function AddPartnerForm({
                       ? "Introduce this person..."
                       : i === 1
                       ? "Their journey or background..."
-                      : "Their vision and role at Venice Pizza House..."
+                      : "Their vision and role at The Wagon Wheel..."
                   }
                   rows={3}
                   className="w-full border border-stone-300 rounded-xl px-3 py-2 text-sm outline-none focus:border-stone-500 transition-colors resize-none"

@@ -14,7 +14,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import img from "public/general/generalPages/enjoy.jpg";
 import { SITE_CONFIG } from "@/lib/siteConfig";
 
 // Sample/test catering packages for preview. Swap prices/items for the real
@@ -26,58 +25,58 @@ const CATERING_PACKAGES: {
   items: string[];
 }[] = [
   {
-    name: "Pizza Party Package",
+    name: "The Pitmaster Spread",
     serves: "Serves 10-12",
-    price: "$130",
+    price: "$180",
     items: [
-      "Assorted large pizzas (cheese, pepperoni & supreme)",
-      "Hand-tossed fresh dough",
-      "Garlic knots",
-      "Marinara & ranch dips",
+      "Slow-smoked brisket, sliced & chopped",
+      "House-made smoked sausage",
+      "Pork ribs with homemade BBQ sauce",
+      "Pickles, onions & sliced bread",
     ],
   },
   {
-    name: "Pasta Feast",
+    name: "Texas Twinkles Party Tray",
     serves: "Serves 10-12",
-    price: "$140",
-    items: [
-      "Spaghetti & fettuccine alfredo trays",
-      "Meatballs in marinara",
-      "Garlic bread",
-      "Grated parmesan & red pepper",
-    ],
-  },
-  {
-    name: "Wings & Appetizers Tray",
-    serves: "50 wings",
     price: "$95",
     items: [
-      "Crispy bone-in wings",
-      "Buffalo, BBQ & plain",
-      "Mozzarella sticks & jalapeno poppers",
-      "Ranch & blue cheese",
+      "Bacon-wrapped stuffed jalapeños",
+      "Cream cheese & brisket filling",
+      "Ranch dipping sauce",
+      "Served hot off the smoker",
     ],
   },
   {
-    name: "Sub & Salad Spread",
+    name: "Chicken Fried Steak Feast",
     serves: "Serves 12-15",
-    price: "$120",
+    price: "$160",
     items: [
-      "Assorted Italian subs, sliced",
-      "Fresh garden & Caesar salads",
-      "House vinaigrette & dressings",
-      "Chips & pickles",
+      "Texas-size hand-breaded chicken fried steaks",
+      "Country cream gravy",
+      "Hand-breaded chicken tenders",
+      "Texas toast",
     ],
   },
   {
-    name: "Daily Specials Combo",
-    serves: "Serves 12",
-    price: "$150",
+    name: "Brisket Sandwich Bar",
+    serves: "50 sandwiches",
+    price: "$145",
     items: [
-      "Chef's choice of daily specials",
-      "One pizza & one pasta tray",
-      "Garlic bread",
-      "Fresh salad",
+      "Chopped brisket sandwiches",
+      "Homemade BBQ sauce & pickles",
+      "Toasted buns",
+      "Brisket mini tacos add-on",
+    ],
+  },
+  {
+    name: "Smokehouse Sides Tray",
+    serves: "Serves 12",
+    price: "$85",
+    items: [
+      "Creamy mac & cheese",
+      "Cream corn",
+      "Loaded baked potatoes",
+      "Ranch beans",
     ],
   },
   {
@@ -85,15 +84,21 @@ const CATERING_PACKAGES: {
     serves: "Serves 15",
     price: "$60",
     items: [
-      "Tiramisu & cannoli",
-      "New York cheesecake",
-      "Chocolate brownies",
+      "Homemade cobbler",
+      "Banana pudding",
+      "Fudge brownies",
       "Fresh whipped cream",
     ],
   },
 ];
 
-export default function CateringPageClient() {
+export default function CateringPageClient({
+  logoUrl,
+  cateringImage = "/general/generalPages/enjoy.jpg",
+}: {
+  logoUrl?: string;
+  cateringImage?: string;
+}) {
   const [open, setOpen] = useState(false);
   const packagesRef = useRef<HTMLDivElement | null>(null);
   const [formData, setFormData] = useState({
@@ -151,7 +156,7 @@ export default function CateringPageClient() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(${logo.src})`,
+            backgroundImage: `url(${logoUrl || logo.src})`,
             backgroundRepeat: "repeat",
             backgroundSize: "100px 100px", // You can adjust the size based on your preference
             transform: "rotate(-8deg) scale(1.2)",
@@ -161,11 +166,12 @@ export default function CateringPageClient() {
 
         <div className="w-full sm:w-1/2 h-75 md:h-full relative overflow-hidden rounded-2xl">
           <Image
-            src={img}
+            src={cateringImage}
             alt={`${SITE_CONFIG.name} homemade catering trays for ${SITE_CONFIG.city} events`}
             fill
             className="object-cover"
             priority
+            unoptimized={cateringImage.startsWith("http")}
           />
         </div>
 
@@ -173,7 +179,7 @@ export default function CateringPageClient() {
           <h1 className="text-4xl md:text-6xl font-extrabold text-brand drop-shadow-lg">
             Bring {SITE_CONFIG.name} to Your Event
           </h1>
-          <p className="text-lg md:text-xl text-white drop-shadow-lg">
+          <p className="text-lg md:text-xl text-stone-200 drop-shadow-lg">
             From corporate events to private parties, make your event
             unforgettable with our bold flavors.
           </p>

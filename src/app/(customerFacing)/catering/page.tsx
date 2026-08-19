@@ -1,27 +1,14 @@
-import type { Metadata } from "next";
 import CateringPageClient from "./_components/CateringPageClient";
-import { SITE_CONFIG } from "@/lib/siteConfig";
+import { buildMetadata } from "@/lib/seo";
+import { getLogoUrl } from "@/lib/siteSettings";
+import { getSiteImage } from "@/lib/getSiteImages";
 
-export const metadata: Metadata = {
-  title: `Catering | Homemade Comfort Food Catering for ${SITE_CONFIG.city} Events`,
-  description: `${SITE_CONFIG.name} caters pizzas, pastas, wings, salads, subs, and daily specials for parties, corporate events, and gatherings in ${SITE_CONFIG.city}, ${SITE_CONFIG.state}. Request a custom quote today.`,
-  keywords: [
-    `catering ${SITE_CONFIG.city}`,
-    `breakfast catering ${SITE_CONFIG.city}`,
-    `burger catering ${SITE_CONFIG.city}`,
-    `event catering ${SITE_CONFIG.city} ${SITE_CONFIG.state}`,
-    `party catering ${SITE_CONFIG.city}`,
-  ],
-  alternates: {
-    canonical: "/catering",
-  },
-  openGraph: {
-    title: `Catering | ${SITE_CONFIG.name} ${SITE_CONFIG.city}`,
-    description: `Pizza & Italian catering - pizzas, pastas, wings, salads, and daily specials for events in ${SITE_CONFIG.city}, ${SITE_CONFIG.state}.`,
-    url: "/catering",
-  },
-};
+export const metadata = buildMetadata("catering");
 
-export default function Page() {
-  return <CateringPageClient />;
+export const dynamic = "force-dynamic";
+
+export default async function Page() {
+  const logoUrl = await getLogoUrl();
+  const cateringImage = await getSiteImage("catering_hero");
+  return <CateringPageClient logoUrl={logoUrl} cateringImage={cateringImage} />;
 }

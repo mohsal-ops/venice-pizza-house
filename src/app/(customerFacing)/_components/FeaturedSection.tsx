@@ -1,6 +1,7 @@
 // Replace SecondSection with this:
 "use client";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 import { ProductSuspense } from "../Menu/_components/ProductSuspense";
 import { Suspense, useRef } from "react";
 import HomeFeaturedSkeleton from "../_skeletons/HomeFeaturedSkeleton";
@@ -59,7 +60,7 @@ export function SecondSectionFeatured({
           {/* View Menu button */}
           <Link href="/Menu">
             <Button size="lg" variant="outline" className="h-10 text-left">
-              View Menu
+              {SITE_CONFIG.menuCtaLabel}
             </Button>
           </Link>
         </div>

@@ -1,35 +1,14 @@
-import type { Metadata } from "next";
 import logo from "public/logo.png";
+import { buildMetadata } from "@/lib/seo";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getLogoUrl } from "@/lib/siteSettings";
 
-export const dynamic = "force-dynamic";
-
-export const metadata: Metadata = {
-  title: "Rewards | Earn Points on Pizza & Wings",
-  description:
-    "Join Venice Pizza House Rewards in Ore City, TX - earn points on every pizza, pasta, and wings order and redeem them for free sides and combos. No app required.",
-  keywords: [
-    "restaurant rewards Ore City",
-    "loyalty program Ore City restaurant",
-    "Venice Pizza House rewards",
-  ],
-  alternates: {
-    canonical: "/rewards",
-  },
-  openGraph: {
-    title: "Rewards | Venice Pizza House Ore City",
-    description:
-      "Earn points on every order and redeem them for free sides and combos at Venice Pizza House.",
-    url: "/rewards",
-  },
-};
+export const metadata = buildMetadata("rewards");
 
 export default async function RewardsPage() {
   const logoUrl = await getLogoUrl();
-  const logoSrc = logoUrl || logo.src;
   return (
     <div className="max-w-5xl mx-auto mt-10 space-y-16">
       {/* 🔥 HERO */}
@@ -37,7 +16,7 @@ export default async function RewardsPage() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(${logoSrc})`,
+            backgroundImage: `url(${logoUrl || logo.src})`,
             backgroundRepeat: "repeat",
             backgroundSize: "200px 200px",
             transform: "rotate(-8deg) scale(1.2)",
@@ -47,11 +26,11 @@ export default async function RewardsPage() {
 
         <div className="relative z-10">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-            Eat More. <span className="text-white">Earn More.</span>
+            Eat More. <span className="text-stone-300">Earn More.</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl mx-auto text-brand text-lg">
-            Every order earns points that turn into free Venice Pizza House meals.
+          <p className="mt-6 max-w-2xl mx-auto text-lg">
+            Every order earns points that turn into free The Wagon Wheel meals.
           </p>
         </div>
       </section>
@@ -63,7 +42,7 @@ export default async function RewardsPage() {
           <div className="rounded-2xl bg-linear-to-br from-brand to-brand-dark p-8 shadow-2xl -rotate-3">
             <div className="flex justify-between items-center mb-10">
               <span className="font-bold text-brand-foreground text-xl">
-                Venice Pizza House
+                The Wagon Wheel
               </span>
               <span className="text-brand-foreground/70">Rewards</span>
             </div>

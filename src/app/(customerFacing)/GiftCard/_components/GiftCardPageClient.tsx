@@ -12,6 +12,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import logo from "public/logo.png";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 import { formatCurrency } from "@/lib/formatters";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -27,8 +28,6 @@ export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
   const [clientSecret, setClientSecret] = useState<string>();
   const [price, setPrice] = useState(50 * 100);
   const route = useRouter();
-  // Uploaded logo (admin → Branding) if set, otherwise the bundled logo.
-  const logoSrc = logoUrl || logo.src;
 
   useEffect(() => {
     const fetchClientSecret = async () => {
@@ -82,7 +81,7 @@ export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(${logoSrc})`,
+            backgroundImage: `url(${logo.src})`,
             backgroundRepeat: "repeat",
             backgroundSize: "200px 200px",
             transform: "rotate(-8deg) scale(1.2)",
@@ -90,29 +89,23 @@ export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
         />
 
         {/* DARK OVERLAY */}
-        <div className="absolute inset-0 bg-black/90" />
+        <div className="absolute inset-0 bg-white/90" />
 
         {/* CONTENT */}
         <div className="relative z-10">
           <div className="flex justify-center mb-6">
             <div className="rounded-2xl bg-brand p-3 shadow-xl">
-              <Image
-                src={logoUrl || logo}
-                alt="Venice Pizza House"
-                width={80}
-                height={80}
-                className="h-20 w-20 rounded-full object-cover"
-              />
+              <Image src={logoUrl || logo} alt={`${SITE_CONFIG.name}`} className="h-20 w-20 rounded-full object-cover" />
             </div>
           </div>
 
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-            A Gift They’ll <span className="text-white">Never Forget</span>
+            A Gift They’ll <span className="text-stone-300">Never Forget</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl mx-auto text-brand text-lg">
+          <p className="mt-6 max-w-2xl mx-auto text-lg">
             Premium food. Bold flavors. One unforgettable experience. Send a
-            Venice Pizza House gift card instantly.
+            The Wagon Wheel gift card instantly.
           </p>
         </div>
       </section>
@@ -123,7 +116,7 @@ export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
           <div className="rounded-2xl bg-linear-to-br from-brand to-brand-dark p-8 shadow-2xl -rotate-3">
             <div className="flex justify-between items-center mb-10">
               <span className="font-bold text-brand-foreground text-xl">
-                Venice Pizza House
+                The Wagon Wheel
               </span>
               <span className="text-brand-foreground/70">Gift Card</span>
             </div>
@@ -153,7 +146,7 @@ export default function GiftCardPageClient({ logoUrl }: { logoUrl?: string }) {
                 className={cn(
                   "rounded-full px-6 py-3 text-lg border-2",
                   price === amt * 100
-                    ? "bg-black text-brand border-black"
+                    ? "bg-black text-stone-200 border-black"
                     : "border-gray-300",
                 )}
                 onClick={() => setPrice(amt * 100)}

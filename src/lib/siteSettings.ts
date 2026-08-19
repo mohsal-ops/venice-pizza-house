@@ -1,8 +1,10 @@
 import db from "@/db/db";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 
-// Default brand accent (the current yellow). Overridden by the "theme_color"
+// Default brand accent, pulled from siteConfig so a fresh DB (no theme_color
+// row yet) still uses the real brand color. Overridden by the "theme_color"
 // SiteSetting once the owner picks a color in admin → Branding.
-export const DEFAULT_THEME_COLOR = "#facc15";
+export const DEFAULT_THEME_COLOR = SITE_CONFIG.primaryColor;
 
 export async function getSetting(
   key: string,
@@ -35,4 +37,27 @@ export async function getHomeText(): Promise<{
     getSetting("home_subheadline", ""),
   ]);
   return { headline, subheadline };
+}
+
+export type SiteText = {
+  headline: string;
+  subheadline: string;
+  feature1Title: string;
+  feature1Desc: string;
+  feature2Title: string;
+  feature2Desc: string;
+};
+
+/** All editable home-page text. Empty strings fall back to siteConfig defaults. */
+export async function getSiteText(): Promise<SiteText> {
+  const [headline, subheadline, feature1Title, feature1Desc, feature2Title, feature2Desc] =
+    await Promise.all([
+      getSetting("home_headline", ""),
+      getSetting("home_subheadline", ""),
+      getSetting("text_feature1_title", ""),
+      getSetting("text_feature1_desc", ""),
+      getSetting("text_feature2_title", ""),
+      getSetting("text_feature2_desc", ""),
+    ]);
+  return { headline, subheadline, feature1Title, feature1Desc, feature2Title, feature2Desc };
 }

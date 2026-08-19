@@ -37,6 +37,7 @@
 
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { google } from "googleapis";
+import { SITE_CONFIG } from "@/lib/siteConfig";
 import type { protos } from "@google-analytics/data";
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -143,8 +144,8 @@ function debugLog(label: string, data: unknown) {
 }
 
 const credentials = {
-  client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL!,
-  private_key: process.env.GOOGLE_PRIVATE_KEY!.replace(/\\n/g, "\n"),
+  client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "",
+  private_key: (process.env.GOOGLE_PRIVATE_KEY || "").replace(/\\n/g, "\n"),
 };
 
 // GA4_PROPERTY_ID must be ONLY the number - no "properties/" prefix, no "G-" prefix
@@ -509,7 +510,7 @@ export async function getPageSpeedData(
   const apiKey = process.env.PAGESPEED_API_KEY;
 
   // Use dedicated pagespeed URL, not the sc-domain: Search Console one
-  const baseUrl = process.env.PAGESPEED_SITE_URL ?? "https://venicepizzahouseorecity.com";
+  const baseUrl = process.env.PAGESPEED_SITE_URL ?? SITE_CONFIG.siteUrl;
   const targetUrl = pageUrl ?? baseUrl;
 
   if (!apiKey) {

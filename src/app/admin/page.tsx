@@ -25,6 +25,11 @@ import { getBusinessHours, getOpenStatus } from "@/lib/getHours";
 import { getOwnerBriefing } from "@/lib/dashboardStats";
 import { formatCurrency } from "@/lib/formatters";
 import { SITE_CONFIG } from "@/lib/siteConfig";
+import { cookies } from "next/headers";
+import { getAccess } from "@/lib/getAccess";
+import { getLogoUrl } from "@/lib/siteSettings";
+import { previewDemo } from "@/lib/previewDemo";
+import PreviewSavingsBanner from "./_components/PreviewSavingsBanner";
 
 const isUnlocked = true; // 🔒 flip to true when ready
 
@@ -121,11 +126,25 @@ function SEOTip({ done, text, action, href }: { done: boolean; text: string; act
 }
 
 export default async function Page() {
-  const [data, businessHours, briefing] = await Promise.all([
+  const access = await getAccess();
+  const [data, businessHours, rawBriefing, logoUrl] = await Promise.all([
     getDashboardData(),
     getBusinessHours(),
     getOwnerBriefing(),
+    getLogoUrl(),
   ]);
+
+  // In the read-only preview, swap the sparse real numbers for simulated order
+  // activity that reflects the estimated orders/day and grows across return
+  // visits. The real owner always sees their real numbers.
+  let briefing = rawBriefing;
+  if (access.mode === "preview") {
+    const jar = await cookies();
+    const sinceMs = Number(jar.get("admin_preview_since")?.value) || Date.now();
+    const daysSince = Math.max(0, Math.floor((Date.now() - sinceMs) / 86400000));
+    briefing = { ...rawBriefing, ...previewDemo(daysSince) };
+  }
+
   const houstonStatus = getOpenStatus(businessHours);
   const daysSincePost = data.latestPost
     ? Math.floor((Date.now() - new Date(data.latestPost.createdAt).getTime()) / 86400000)
@@ -161,7 +180,7 @@ export default async function Page() {
         <header className="bg-white rounded-2xl border border-stone-200 shadow-sm p-5 flex flex-col sm:flex-row sm:items-center gap-4">
           <div className="flex items-center gap-4 flex-1 min-w-0">
             <div className="w-12 h-12 rounded-full bg-stone-50 border border-stone-100 flex items-center justify-center shrink-0 overflow-hidden">
-              <Image src={Logo} alt={`${SITE_CONFIG.name} logo`} width={40} height={40} className="w-full h-full rounded-full object-cover" />
+              <Image src={logoUrl || Logo} alt={`${SITE_CONFIG.name} logo`} width={40} height={40} className="w-full h-full rounded-full object-cover" />
             </div>
             <div className="min-w-0">
               <p className="text-xs text-stone-400">{todayLabel}</p>
@@ -184,6 +203,8 @@ export default async function Page() {
             </a>
           </div>
         </header>
+
+        {access.mode === "preview" && <PreviewSavingsBanner />}
 
         {/* ── TODAY - the money glance ── */}
         <div>
@@ -292,7 +313,7 @@ export default async function Page() {
               <SEOTip done={daysSincePost !== null && daysSincePost <= 7} text="Posted within the last 7 days (freshness signal)" action="Write now" href="/admin/Blog" />
               <SEOTip done={data.activeItems >= 10} text="10+ active menu items visible on site" action="Add items" href="/admin/menuItems/new" />
               <SEOTip done={data.featuredItems >= 3} text="3+ featured items on home page" action="Set featured" href="/admin/menuItems" />
-              <SEOTip done={data.totalLocations >= 1} text="Location added (helps local SEO in Ore City)" action="Add location" href="/admin/places" />
+              <SEOTip done={data.totalLocations >= 1} text="Location added (helps local SEO in Eagle Pass)" action="Add location" href="/admin/places" />
               <div className="mt-4 bg-stone-50 rounded-xl p-3 flex gap-2">
                 <Zap size={14} className="text-[#c85a1e] shrink-0 mt-0.5" />
                 <p className="text-xs text-stone-500 leading-relaxed">

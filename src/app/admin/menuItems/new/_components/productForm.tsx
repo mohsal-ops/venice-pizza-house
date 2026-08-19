@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import { formatCurrency } from "@/lib/formatters";
 import { Label } from "@radix-ui/react-label";
 import { Item } from "generated/prisma";
 import { Plus, ImageIcon } from "lucide-react";
@@ -33,6 +34,7 @@ export default function ProductForm({
     initialState,
   );
   const [categoryId, setCategoryId] = useState<string>(item?.typeId || "");
+  const [price, setPrice] = useState<string>(item ? (item.priceInCents / 100).toFixed(2) : "");
   const [isCaterable, setIsCaterable] = useState<boolean>(item?.isCaterable ?? false);
   const [preview, setPreview] = useState<string | null>(item?.image || null);
   const hiddenCategoryRef = useRef<HTMLInputElement>(null);
@@ -84,12 +86,19 @@ export default function ProductForm({
                 step="0.01"
                 id="price"
                 name="price"
-                defaultValue={item ? (item.priceInCents / 100).toFixed(2) : ""}
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
                 placeholder="0.00"
                 className="pl-7"
               />
             </div>
-            <p className="text-xs text-stone-400">In dollars — e.g. 12.99</p>
+            {price && Number(price) > 0 ? (
+              <p className="text-xs text-stone-500">
+                Customers pay <span className="font-semibold text-stone-700">{formatCurrency(Number(price))}</span>
+              </p>
+            ) : (
+              <p className="text-xs text-stone-400">In dollars, e.g. 12.99</p>
+            )}
           </div>
         </div>
 
