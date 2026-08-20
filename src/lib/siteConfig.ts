@@ -1,142 +1,179 @@
 // Single source of truth for every brand-specific value on the site.
-// To onboard a new restaurant client, this is the only file that should
-// need to change (plus swapping image assets in /public).
+const FEATURES = {
+  catering: false,
+  giftCard: false,
+  rewards: true,
+  blog: false,
+};
+
+type FeatureKey = keyof typeof FEATURES;
+type NavLink = { label: string; href: string; feature?: FeatureKey };
+
+const ALL_NAV_LINKS: NavLink[] = [
+  { label: "Home", href: "/" },
+  { label: "Menu", href: "/Menu" },
+  { label: "Catering", href: "/catering", feature: "catering" },
+  { label: "Gift Card", href: "/GiftCard", feature: "giftCard" },
+  { label: "Rewards", href: "/rewards", feature: "rewards" },
+  { label: "Press", href: "/Blog", feature: "blog" },
+  { label: "Our Story", href: "/story" },
+];
+
+const ALL_FOOTER_LINKS: NavLink[] = [
+  { label: "Menu", href: "/Menu" },
+  { label: "Catering", href: "/catering", feature: "catering" },
+  { label: "Gift Cards", href: "/GiftCard", feature: "giftCard" },
+  { label: "Terms", href: "/terms" },
+];
+
+const enabled = (l: NavLink) => !l.feature || FEATURES[l.feature];
+const pickLink = ({ label, href }: NavLink) => ({ label, href });
 
 export const SITE_CONFIG = {
   // Brand
-  name: "Venice Pizza House",
-  tagline: "Great food and a family friendly atmosphere",
+  name: "Hamburguesas Rio Laredo Texas",
+  tagline: "LAS ORIGINALES DE NUEVO LAREDO SINCE 1967",
   subTagline:
-    "Fresh pizzas, authentic pastas, crispy wings, salads, and subs in Ore City, TX.",
-  legalName: "Venice Pizza House",
-  trademark: "Venice Pizza House",
+    "Authentic Mexican-style burgers, lonches de milanesa, flour tortilla tacos, and fresh-cut fries in Laredo, TX.",
+  legalName: "Hamburguesas Rio Laredo Texas LLC",
+  trademark: "Hamburguesas Rio",
 
   // Admin intro animation: "burger" (fast food) | "coffee" (café) | "pizza" (pizzeria)
-  loaderStyle: "pizza",
+  loaderStyle: "burger",
+
+  // Main call-to-action button label
+  menuCtaLabel: "Order online",
 
   // Contact & Location
-  address: "504 US HWY 259, Ore City, TX 75683",
-  street: "504 US HWY 259",
-  city: "Ore City",
+  address: "520 Shiloh Dr, Laredo, TX 78045",
+  street: "520 Shiloh Dr",
+  city: "Laredo",
   state: "TX",
-  zip: "75683",
-  phone: "+1 903-968-1310",
-  email: "roma.pizza@yahoo.com",
-  cateringEmail: "roma.pizza@yahoo.com",
+  zip: "78045",
+  phone: "(956) 704-8195",
+  email: "info@hamburguesasrio.com",
+  cateringEmail: "catering@hamburguesasrio.com",
   timezone: "America/Chicago",
-  lat: 32.8037983,
-  lng: -94.7191372,
+  lat: 27.5817,
+  lng: -99.4703,
   googleMapsUrl:
-    "https://www.google.com/maps/place/Venice+Pizza/@32.8038028,-94.7217121,17z/data=!3m1!4b1!4m6!3m5!1s0x86366d2822164837:0x9f1b37f49ed086d5!8m2!3d32.8037983!4d-94.7191372!16s%2Fg%2F11jn1q9h6v?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D",
+    "https://www.google.com/maps/search/?api=1&query=Hamburguesas+Rio+520+Shiloh+Dr+Laredo+TX",
 
   // Social
-  instagram: "",
-  instagramUrl: "",
-  facebookUrl: "https://www.facebook.com/profile.php?id=61572209801747",
+  instagram: "hamburguesasriolaredotexas",
+  instagramUrl: "https://www.instagram.com/hamburguesasriolaredotexas/",
+  facebookUrl: "https://www.facebook.com/hamburguesas.rio.ltx",
   tiktokUrl: "",
   beholdFeedId: "",
 
   // SEO
-  siteUrl: "https://venicepizzahouseorecity.com", // TODO: confirm real domain
-  seoTitle: "Venice Pizza House | Pizza, Pasta & Wings in Ore City, TX",
+  siteUrl: "https://hamburguesasriolaredo.com",
+  seoTitle: "Hamburguesas Rio Laredo Texas | Authentic Mexican Burgers & Lonches",
   seoDescription:
-    "Venice Pizza House serves fresh pizzas, authentic pastas, crispy wings, salads, and subs in Ore City, TX. Dine-in, takeout, and delivery available.",
+    "Las originales de Nuevo Laredo desde 1967. Serving 100% beef Mexican-style burgers, lonches de milanesa, flour tortilla tacos, and natural hand-cut fries in Laredo, TX.",
   seoKeywords: [
-    "pizza Ore City TX",
-    "pasta Ore City",
-    "wings Ore City",
-    "family restaurant Ore City",
-    "pizza delivery Ore City",
-    "Venice Pizza House",
+    "Hamburguesas Rio Laredo Texas",
+    "Hamburguesas Rio Laredo",
+    "Mexican Burgers Laredo TX",
+    "Lonche de Milanesa Laredo",
+    "Nuevo Laredo Burgers",
+    "Food Truck Laredo TX",
   ],
-  ogImage: "/general/generalPages/mainImage.jpg", // TODO: swap in a real hero photo
+  ogImage: "/general/generalPages/mainImage.jpg",
 
-  // Colors (Tailwind hex values)
-  primaryColor: "#8b1a1a", // TODO: adjust to match their red/gold branding from the logo
-  secondaryColor: "#c9a227",
-  accentColor: "#2f2f2f",
+  // Structured-data / business info (used in JSON-LD)
+  cuisines: ["Mexican", "Burgers", "Fast Food"],
+  priceRange: "$",
 
-  // Hours (used for open/closed status) - hour values are 24h local time
+  // Outreach conversion layer
+  outreach: {
+    enabled: true,
+    fullPrice: 2600,
+    discountedPrice: 699,
+    discountReason: "review",
+    trialLengthDays: 14,
+    calendlyUrl: "https://calendly.com/popdeveloper54/10-minute-meet",
+    savings: { estimatedOrdersPerDay: 40, avgOrderValue: 18, commissionPct: 20 },
+  },
+
+  // Colors (Food truck yellow, brand crimson red, clean dark background)
+  primaryColor: "#fbc02d",
+  secondaryColor: "#d32f2f",
+  accentColor: "#111111",
+
+  // Hours (used for open/closed status) - 24h local time (5:00 PM - 10:00 PM)
   hours: [
-    { day: "Sunday", open: null, close: null }, // TODO: confirm
-    { day: "Monday", open: null, close: null }, // TODO: confirm
-    { day: "Tuesday", open: null, close: null }, // TODO: confirm
-    { day: "Wednesday", open: null, close: null }, // TODO: confirm
-    { day: "Thursday", open: null, close: null }, // TODO: confirm
-    { day: "Friday", open: null, close: null }, // TODO: confirm
-    { day: "Saturday", open: null, close: null }, // TODO: confirm
+    { day: "Sunday", open: 17, close: 22 },
+    { day: "Monday", open: 17, close: 22 },
+    { day: "Tuesday", open: 17, close: 22 },
+    { day: "Wednesday", open: 17, close: 22 },
+    { day: "Thursday", open: 17, close: 22 },
+    { day: "Friday", open: 17, close: 22 },
+    { day: "Saturday", open: 17, close: 22 },
   ] as { day: string; open: number | null; close: number | null }[],
 
   // Home page text sections
   home: {
-    heroHeadline: "Fresh pizza, made your way",
-    heroSubHeadline: "served daily in Ore City",
-    galleryTitle: "Venice Pizza House",
-    gallerySubtitle: "Great Food, Family Friendly Atmosphere",
+    heroHeadline: "ORIGINAL LAREDO MEXICAN BURGERS",
+    heroSubHeadline: "Authentic Mexican burgers in Laredo.", // 5 words
+    galleryTitle: "Hamburguesas Rio Laredo Texas",
+    gallerySubtitle: "Las originales de Nuevo Laredo desde 1967",
     distinctiveFeatures: [
       {
-        title: "Crispy, golden, made fresh",
+        title: "Carne 100% de Res & Papas Naturales",
         description:
-          "From classic pepperoni to loaded specialty pies, every pizza is made fresh to order with quality ingredients.",
-        image: "/general/generalPages/enjoy.jpg", // TODO: swap in real photo
+          "Made with fresh 100% beef patties, daily baked bread, natural hand-cut fries, and pickled jalapeños.",
+        image: "/general/generalPages/enjoy.jpg",
       },
       {
-        title: "More than just pizza",
+        title: "Lonches de Milanesa & Tacos",
         description:
-          "Authentic pastas, crispy wings, fresh salads, and hearty subs, something for everyone at the table.",
-        image: "/general/generalPages/vibe.jpg", // TODO: swap in real photo
+          "Serving our famous Lonche de Milanesa and large flour tortilla tacos packed with cheese and seasoned beef.",
+        image: "/general/generalPages/vibe.jpg",
       },
     ],
     featuring: [
-      { name: "Dine-in", icon: "MdOutlineFamilyRestroom" },
-      { name: "Takeout", icon: "PiPackageFill" },
-      { name: "Delivery", icon: "BsBagCheckFill" },
-      { name: "Family friendly", icon: "MdOutlineFamilyRestroom" },
+      { name: "Desde 1967", icon: "MdOutlineVerified" },
+      { name: "Papas Naturales", icon: "PiPackageFill" },
+      { name: "Orden Directa", icon: "BsBagCheckFill" },
+      { name: "Laredo, TX", icon: "MdOutlineStorefront" },
     ],
     faq: [
       {
-        question: "What are you known for?",
+        question: "¿Dónde están ubicados?",
         answer:
-          "Fresh pizzas, authentic pastas, crispy wings, and great food in a family friendly atmosphere.",
+          "Estamos ubicados en 520 Shiloh Dr, Laredo, TX 78045 (en el estacionamiento de Variety Meats).",
       },
       {
-        question: "What meals do you serve?",
+        question: "¿Cuál es el horario de atención?",
         answer:
-          "Pizzas, pastas, wings, salads, and subs.",
+          "Abrimos de lunes a domingo de 5:00 PM a 10:00 PM.",
       },
       {
-        question: "Do you deliver?",
+        question: "¿Cuáles son las especialidades del menú?",
         answer:
-          "Yes! We deliver to Ore City, Diana, Lone Star, and surrounding areas.", // TODO: confirm delivery radius
+          "La Hamburguesa Sencilla, el Lonche de Milanesa, los Tacos de harina grandes y las papas naturales recién cortadas.",
       },
       {
-        question: "Where are you located?",
-        answer: "We're at 504 US HWY 259, Ore City, TX 75683.",
+        question: "¿Puedo hacer mi pedido por teléfono o para llevar?",
+        answer:
+          "¡Sí! Puedes llamar al (956) 704-8195 para ordenar y recoger rápidamente.",
       },
     ],
   },
 
+  // Which optional sections are enabled
+  features: FEATURES,
+
   // Navbar links
-  navLinks: [
-    { label: "Home", href: "/" },
-    { label: "Menu", href: "/Menu" },
-    { label: "Catering", href: "/catering" }, // TODO: confirm they offer catering
-    { label: "Gift Card", href: "/GiftCard" }, // TODO: confirm they offer gift cards
-    { label: "Rewards", href: "/rewards" },
-    { label: "Press", href: "/Blog" },
-    { label: "Our Story", href: "/story" },
-  ],
+  navLinks: ALL_NAV_LINKS.filter(enabled).map(pickLink),
 
   // Footer
   footer: {
     get copyright() {
-      return `© ${new Date().getFullYear()} Venice Pizza House. All rights reserved.`;
+      return `© ${new Date().getFullYear()} Hamburguesas Rio Laredo Texas LLC. All rights reserved.`;
     },
-    links: [
-      { label: "Menu", href: "/Menu" },
-      { label: "Catering", href: "/catering" },
-      { label: "Terms", href: "/terms" },
-    ],
+    links: ALL_FOOTER_LINKS.filter(enabled).map(pickLink),
   },
 };
 
