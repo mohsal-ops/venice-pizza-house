@@ -111,11 +111,11 @@ function AddProductCard({
   });
   return (
     <div className="animate-in fade-in-50 duration-300">
-      <div className="border rounded-2xl shadow-sm p-4 space-y-4 bg-white">
+      <div className="border rounded-2xl shadow-sm p-4 space-y-4 bg-card">
         <div>
           <h3 className="text-lg font-semibold">{product.name}</h3>
           {product.description && (
-            <p className="text-gray-500 text-sm font">{product.description}</p>
+            <p className="text-muted-foreground text-sm font">{product.description}</p>
           )}
           <p className="text-sm text-muted-foreground">
             {formatCurrency(product.priceInCents / 100)}
@@ -374,7 +374,10 @@ export default function SchedulePickupDialog({
       });
 
       const data = await res.json();
-      await mutate(["/api/cart/get", cartId]);
+      // Revalidate the shared cart key so the nav badge + sidebar update
+      // immediately (the bound mutate's first arg is DATA, not a key — passing a
+      // key array here set bogus data and was the reason the count went stale).
+      await mutate();
       router.refresh();
       toast(data.message);
       onOpenChange(false);
