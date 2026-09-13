@@ -10,16 +10,23 @@ import { verifyAdminSessionToken } from "@/lib/adminSession";
 const MUTE_COOKIE = "va_mute";
 const MUTE_MAX_AGE = 60 * 60 * 24 * 90; // 90 days
 
-// Emails the owner when a real browser opens the site. Intended for the
-// private pre-launch Vercel link where every visit is the owner or their
-// team. The client only calls this once per browser every couple of hours
-// (see VisitAlert.tsx), and we add an IP backstop here so a reload loop or a
-// script can't spam the mailbox. To turn it off: delete the <VisitAlert />
-// mount in (customerFacing)/layout.tsx, or unset OWNER_ALERT_EMAIL.
+// Emails the AGENCY when a browser opens the ADMIN/preview dashboard - a lead
+// looking at their demo. Mounted in admin/layout.tsx gated to preview mode ONLY
+// (NOT the public customer site: that emailed on every live-site visit and
+// flooded the inbox). Always goes to AGENCY_ALERT_EMAIL, never the client's
+// OWNER_ALERT_EMAIL. The client pings this at most once per browser every couple
+// of hours (see VisitAlert.tsx), plus an IP backstop here; logged-in owners are
+// muted below. To turn it off entirely: remove the <VisitAlert /> mount in
+// admin/layout.tsx.
 export const runtime = "nodejs";
 
+// Agency inbox for access-tracking / lead alerts. Provisioned as AGENCY_ALERT_EMAIL
+// (see the builder's provision.ts); the literal is the guaranteed fallback so this
+// keeps reaching us even on a site whose env var wasn't backfilled.
+const AGENCY_ALERT_EMAIL = process.env.AGENCY_ALERT_EMAIL || "bensa0016@gmail.com";
+
 export async function POST(req: NextRequest) {
-  const to = process.env.OWNER_ALERT_EMAIL || process.env.SMTP_USER;
+  const to = AGENCY_ALERT_EMAIL;
   if (!to) return NextResponse.json({ ok: true });
 
   // Don't alert on the owner's own visits. Skip if they're a logged-in admin,
