@@ -97,7 +97,7 @@ export default function HeroCarousel({
 
   return (
     <div
-      className="flex relative overflow-hidden h-[calc(100svh-5rem)] w-full sm:w-[85%] flex-col sm:flex-row bg-stone-100 sm:rounded-3xl sm:p-2"
+      className="flex relative overflow-hidden h-[calc(100svh-5rem)] w-full sm:w-[85%] flex-col sm:flex-row bg-muted sm:rounded-3xl sm:p-2"
       onMouseEnter={pause}
       onMouseLeave={resume}
       onFocus={pause}
@@ -106,7 +106,9 @@ export default function HeroCarousel({
       aria-roledescription="carousel"
       aria-label={`${SITE_CONFIG.name} highlights`}
     >
-      <LogoDriftBackground veilClassName="bg-background/90" className="sm:rounded-3xl" />
+      {/* Same veil as the reviews section (bg-muted/80) so the tiled logo pattern
+          reads as a subtle tint, not high-contrast white marks against near-black. */}
+      <LogoDriftBackground veilClassName="bg-muted/80" className="sm:rounded-3xl" />
 
       {/* Text column (Phase 0 layout preserved). subTagline is a constant kicker
           under the logo; the rotating trio (headline / subheadline / CTA) sits
